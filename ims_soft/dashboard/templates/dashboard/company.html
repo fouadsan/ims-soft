@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block scripts %}
-<script src="{% static 'users/main.js' %}" defer></script>
+<script src="{% static 'dashboard/main.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block content %}
@@ -18,9 +18,12 @@
                             <h5 class="m-b-10">Users</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
-                                        class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'users:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'dashboard:index' %}"><i class="feather icon-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a>Settings</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'users:profile' %}">Company</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,23 +70,17 @@
                     </div>
                     <div class="card-body">
                         <div id="alert-box"></div>
-                        <form id="profile-form">
+                        <form id="company-form">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputFname">First Name</label>
-                                    <input type="text" class="form-control" id="inputFname" placeholder="First Name"
-                                        value="{% if obj.first_name %} {{ obj.first_name }} {% endif %}">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputLname">Last Name</label>
-                                    <input type="text" class="form-control" id="inputLname" placeholder="Last Name"
-                                        value="{% if obj.last_name %} {{ obj.last_name }} {% endif %}">
+                                    <label for="inputName">Name</label>
+                                    <input type="text" class="form-control" id="inputName" placeholder="Company Name"
+                                        value="{% if obj.name %} {{ obj.name }} {% endif %}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail"
-                                        placeholder="Ex: user@domaine.com"
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Email"
                                         value="{% if obj.email %} {{ obj.email }} {% endif %}">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -98,12 +95,15 @@
                                         value="{% if obj.address %} {{ obj.address }} {% endif %}">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputCity">City</label>
-                                    <input type="text" class="form-control" id="inputCity" placeholder="Ex: El-Eulma"
-                                        value="{% if obj.city %} {{ obj.city }} {% endif %}">
+                                    <label for="inputWebUrl">Web Site</label>
+                                    <input type="text" class="form-control" id="inputWebUrl"
+                                        placeholder="Ex: www.google.com"
+                                        value="{% if obj.web_url %} {{ obj.web_url }} {% endif %}">
+                                </div>
+                                <div class="form-group col-md-6">
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">
-                                    <span id="saveProfile-box">Save</span>
+                                    <span id="saveCompany-box">Save</span>
                                     <div id="spinner-box" class="spinner-border text-center not-visible">
                                         <div class="sr-only" role="status"></div>
                                     </div>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Our own apps
     'users',
+    'dashboard',
 
     # Third party apps
     'crispy_forms',
@@ -125,6 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    BASE_DIR / 'dashboard' / 'static',
     BASE_DIR / 'users' / 'static',
 ]
 

@@ -22,8 +22,9 @@ def profile_view(request):
                 'city': instance.city
             })
     context = {
+        'title': 'Profile',
         'obj': obj,
-        'form': form,
+        'form': form
     }
 
     return render(request, 'users/main.html', context)
