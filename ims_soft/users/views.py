@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import Profile
-from .forms import ProfileForm
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+
+from .forms import ProfileForm
+from .models import Profile
 
 
 @login_required

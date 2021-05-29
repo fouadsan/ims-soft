@@ -5,3 +5,11 @@ const handleAlerts = (type, msg) => {
         </div>
     `
 }
+
+const handleModalAlerts = (type, msg) => {
+    alertModalBox.innerHTML = `
+        <div class="alert alert-${type}" role="alert">
+            ${msg}
+        </div>
+    `
+}

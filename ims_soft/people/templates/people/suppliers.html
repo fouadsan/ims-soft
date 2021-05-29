@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Suppliers
+{% endblock title %}
+
+{% block scripts %}
+<script src="{% static 'people/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block content %}
+<!-- [ Suppliers Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Sample Page</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a>People</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Suppliers</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <!-- Add Supplier Modal -->
+        <div id="addSupplierModal" class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLiveLabel">Create Supplier</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alertModal-box"></div>
+                        <form id="supplier-form" autocomplete="off">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <div class="">
+                                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" id="add-btn" class="btn  btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Suppliers</h5>
+                        <button type="button" class="btn  btn-success" data-toggle="modal"
+                            data-target="#addSupplierModal"> add + </button>
+                        <div class="card-header-right">
+                            <div class="btn-group card-option">
+                                <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="feather icon-more-horizontal"></i>
+                                </button>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown-item full-card"><a href="#!"><span><i
+                                                    class="feather icon-maximize"></i> maximize</span><span
+                                                style="display:none"><i class="feather icon-minimize"></i>
+                                                Restore</span></a></li>
+                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i
+                                                    class="feather icon-minus"></i> collapse</span><span
+                                                style="display:none"><i class="feather icon-plus"></i> expand</span></a>
+                                    </li>
+                                    <li class="dropdown-item reload-card"><a href="#!"><i
+                                                class="feather icon-refresh-cw"></i> reload</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div id="alert-box"></div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Vendor Name</th>
+                                        <th>Email</th>
+                                        <th>Phone N°</th>
+                                        <th>Fax N°</th>
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="suppliers-box"></tbody>
+                            </table>
+                            <div id="spinner-box" class="text-center">
+                                <div class="spinner-border mb-3" role="status"></div>
+                            </div>
+                            <div class="text-center mb-3" id="end-box">
+                                <button class="btn btn-primary" id="load-btn">Load more</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+    </div>
+</div>
+<!-- [ Suppliers Content ] end -->
+{% endblock content %}

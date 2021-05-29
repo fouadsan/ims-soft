@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Our own apps
     'users',
     'dashboard',
+    'people',
 
     # Third party apps
     'crispy_forms',
@@ -128,6 +129,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'dashboard' / 'static',
     BASE_DIR / 'users' / 'static',
+    BASE_DIR / 'clients' / 'static',
 ]
 
 MEDIA_URL = '/media/'
