@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+
+    <!-- favicon -->
+    <!-- <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}" /> -->
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <!-- Custom js -->
+    <script src="{% static 'functions.js' %}" defer></script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+    <title>IMS-soft | {% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+
+    {% if user.is_authenticated %}
+    {% include "navbar.html" %}
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- Required Js -->
+    <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/ripple.js' %}"></script>
+    <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+
+</body>
+
+</html>
