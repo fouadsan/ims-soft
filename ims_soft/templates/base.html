@@ -36,12 +36,21 @@
     <!-- [ Pre-loader ] End -->
 
     {% if user.is_authenticated %}
-    {% include "navbar.html" %}
+        {% include "navbar.html" %}
     {% endif %}
 
-    {% block content %}
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
 
-    {% endblock content %}
+            {% if user.is_authenticated %}
+                {% include "breadcrumb.html" %}
+            {% endif %}
+
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
 
     <!-- Required Js -->
     <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>

@@ -23,6 +23,7 @@ def company(request):
                 'web_url': instance.web_url
             })
     context = {
+        'section_title': 'Settings',
         'title': 'Company',
         'obj': obj,
         'form': form
