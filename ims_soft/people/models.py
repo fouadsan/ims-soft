@@ -29,11 +29,7 @@ class Client(models.Model):
     class Meta:
         ordering = ("-id",)
 
-<<<<<<< HEAD
 class Employee(models.Model):
-=======
-class Employer(models.Model):
->>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
 
     name = models.CharField(max_length=200)  
     phone = models.CharField(max_length=13, blank=True, null=True)
@@ -42,11 +38,7 @@ class Employer(models.Model):
     down_payments = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
-<<<<<<< HEAD
         return f"Employee: {self.name}"
-=======
-        return f"Employer: {self.name}"
->>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
 
     class Meta:
         ordering = ("-id",)
