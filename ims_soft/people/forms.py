@@ -1,6 +1,10 @@
 from django import forms
 
+<<<<<<< HEAD
 from .models import Client, Employee, Supplier
+=======
+from .models import Client, Employer, Supplier
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Submit
 
@@ -38,7 +42,11 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = ('name', 'email', 'phone', 'fax', 'address')
 
+<<<<<<< HEAD
 class EmployeeForm(forms.ModelForm):
+=======
+class EmployerForm(forms.ModelForm):
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -50,9 +58,15 @@ class EmployeeForm(forms.ModelForm):
         )
         self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
         self.helper.form_method = 'POST'
+<<<<<<< HEAD
         super(EmployeeForm, self).__init__(*args, **kwargs)
     class Meta:
         model = Employee
+=======
+        super(EmployerForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = Employer
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
         fields = ('name', 'phone', 'address', 'salary', 'down_payments')
 
 

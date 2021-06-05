@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+console.log('hello world')
+
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
 const rowsBox = document.getElementById('rows-box')
 const spinnerBox = document.getElementById('spinner-box')
 const actionBtn = document.getElementById('action-btn')
@@ -5,10 +10,13 @@ const loadBtn = document.getElementById('load-btn')
 const endBox = document.getElementById('end-box')
 
 const createForm = document.getElementById('create-form')
+<<<<<<< HEAD
 
 var globalVariableSearchData
 const searchInput = document.getElementById('search-input')
 
+=======
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
 const objectName = document.getElementById('id_name')
 const objectEmail = document.getElementById('id_email')
 const objectPhone = document.getElementById('id_phone')
@@ -56,9 +64,15 @@ const getData = () => {
                     el.fax ? el.fax : el.fax = "N/A"
                     el.address ? el.address : el.address = "N/A"
                     el.down_payments ? el.down_payments : el.down_payments = "N/A"
+<<<<<<< HEAD
 
                     el.salary ?
                         rowsBox.innerHTML += `
+=======
+                    
+                    el.salary ? 
+                    rowsBox.innerHTML += `
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
                         <tr>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
@@ -81,7 +95,11 @@ const getData = () => {
                             </td>
                         </tr>
                     `:
+<<<<<<< HEAD
                         rowsBox.innerHTML += `
+=======
+                    rowsBox.innerHTML += `
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
                         <tr>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
@@ -112,6 +130,16 @@ const getData = () => {
                     endBox.textContent = 'No more data to load...'
                 }
             }, 200)
+<<<<<<< HEAD
+=======
+            if (response.size === 0) {
+                endBox.textContent = 'No object added yet...'
+            }
+            else if (response.size <= visible) {
+                loadBtn.classList.add('not-visible')
+                endBox.textContent = 'No more data to load...'
+            }
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
         },
         error: function (error) {
             console.log(error)
@@ -133,6 +161,7 @@ createForm.addEventListener('submit', e => {
         type: 'POST',
         url: '',
         data: objectSalary ? {
+<<<<<<< HEAD
             'csrfmiddlewaretoken': csrf[0].value,
             'name': objectName.value,
             'phone': objectPhone.value,
@@ -142,6 +171,17 @@ createForm.addEventListener('submit', e => {
         } : {
             'csrfmiddlewaretoken': csrf[0].value,
             'name': objectName.value,
+=======
+            'csrfmiddlewaretoken': csrf[0].value,
+            'name': objectName.value,
+            'phone': objectPhone.value,
+            'address': objectAddress.value,
+            'salary': objectSalary.value,
+            'down_payments': objectDownPay.value
+        } : {
+            'csrfmiddlewaretoken': csrf[0].value,
+            'name': objectName.value,
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
             'email': objectEmail.value,
             'phone': objectPhone.value,
             'fax': objectFax.value,
@@ -149,19 +189,34 @@ createForm.addEventListener('submit', e => {
         },
         success: function (response) {
             newRowId = response.id
+<<<<<<< HEAD
             globalVariableSearchData.push(response)
             if (response.hasOwnProperty('email')) {
                 response.email ? response.email : response.email = "N/A"
                 response.fax ? response.fax : response.fax = "N/A"
             } else if (response.hasOwnProperty('salary')) {
+=======
+            console.log(newRowId)
+            if(response.hasOwnProperty('email')){
+                response.email ? response.email : response.email = "N/A"
+                response.fax ? response.fax : response.fax = "N/A"
+            } else if (response.hasOwnProperty('salary')){
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
                 response.salary ? response.salary : response.salary = "N/A"
                 response.down_payments ? response.down_payments : response.down_payments = "N/A"
             }
             response.phone ? response.phone : response.phone = "N/A"
+<<<<<<< HEAD
             response.address ? response.address : response.address = "N/A"
 
             response.salary ?
                 rowsBox.insertAdjacentHTML('afterbegin', `
+=======
+            response.address ? response.address : response.address = "N/A" 
+
+            response.salary ?
+            rowsBox.insertAdjacentHTML('afterbegin', `
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
                 <tr>
                 <td id="id-${response.id}">${response.id}</td>
                 <td id="name-${response.id}">${response.name}</td>
@@ -183,8 +238,13 @@ createForm.addEventListener('submit', e => {
                     </td>
                     </td>
                 </tr>
+<<<<<<< HEAD
             `) :
                 rowsBox.insertAdjacentHTML('afterbegin', `
+=======
+            `) : 
+            rowsBox.insertAdjacentHTML('afterbegin', `
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
                 <tr>
                 <td id="id-${response.id}">${response.id}</td>
                 <td id="name-${response.id}">${response.name}</td>
@@ -208,7 +268,11 @@ createForm.addEventListener('submit', e => {
             `)
             // $('#createModal').modal('hide')
             handleModalAlerts('success', 'New Object added!')
+<<<<<<< HEAD
             endBox.textContent = ""
+=======
+            endBox.textContent=""
+>>>>>>> f8d56b506ebe52bcb849e5ab5e4e29c9e8dd6750
             createForm.reset()
         },
         error: function () {
