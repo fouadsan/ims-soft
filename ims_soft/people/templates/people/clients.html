@@ -8,20 +8,20 @@
 {% endblock scripts %}
 
 {% block title %}
-Suppliers
+Clients
 {% endblock title %}
 
 
 {% block content %}
-<!-- [ Suppliers Content ] start -->
+<!-- [ Clients Content ] start -->
 
-<!-- Create Supplier Modal -->
-<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+<!-- Create Clients Modal -->
+<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Create Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel">Create Client</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -29,7 +29,7 @@ Suppliers
                 <div id="alertModal-box"></div>
                 <form id="create-form" autocomplete="off">
                     {% csrf_token %}
-                    {{form|crispy}}
+                    {{ form|crispy }}
                     <div class="">
                         <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" id="add-btn" class="btn  btn-primary">Save</button>
@@ -40,13 +40,13 @@ Suppliers
     </div>
 </div>
 
-<!-- Update  Modal -->
+<!-- Update Client Modal -->
 <div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Client</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -60,13 +60,13 @@ Suppliers
     </div>
 </div>
 
-<!-- Delete  start -->
+<!-- Delete client Modal start -->
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Client</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -89,8 +89,8 @@ Suppliers
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Suppliers</h5>
-                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#addModal"> add +
+                <h5>Clients</h5>
+                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#createModal"> add +
                 </button>
                 <div class="card-header-right">
                     <div class="btn-group card-option">
@@ -124,7 +124,7 @@ Suppliers
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Vendor Name</th>
+                                <th>Client Name</th>
                                 <th>Email</th>
                                 <th>Phone N°</th>
                                 <th>Fax N°</th>
@@ -146,5 +146,5 @@ Suppliers
     </div>
     <!-- [ sample-page ] end -->
 </div>
-<!-- [ Suppliers Content ] start -->
+<!-- [ Clients Content ] start -->
 {% endblock content %}

@@ -13,3 +13,7 @@ const handleModalAlerts = (type, msg) => {
         </div>
     `
 }
+
+
+//Checks countries.result for an object with a property of 'id' whose value is 'AF'
+//Then removes it ;p

@@ -8,20 +8,19 @@
 {% endblock scripts %}
 
 {% block title %}
-Suppliers
+employees
 {% endblock title %}
 
-
 {% block content %}
-<!-- [ Suppliers Content ] start -->
+<!-- [ employees Content ] start -->
 
-<!-- Create Supplier Modal -->
+<!-- Create Modal -->
 <div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Create Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel">Create Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -46,7 +45,7 @@ Suppliers
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -66,7 +65,7 @@ Suppliers
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Supplier</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -89,7 +88,7 @@ Suppliers
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Suppliers</h5>
+                <h5>employees</h5>
                 <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#addModal"> add +
                 </button>
                 <div class="card-header-right">
@@ -124,11 +123,12 @@ Suppliers
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Vendor Name</th>
-                                <th>Email</th>
+                                <th>employee Name</th>
                                 <th>Phone N°</th>
-                                <th>Fax N°</th>
                                 <th>Address</th>
+                                <th>Salary</th>
+                                <th>D Payments</th>
+                                <th>Credit</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -146,5 +146,5 @@ Suppliers
     </div>
     <!-- [ sample-page ] end -->
 </div>
-<!-- [ Suppliers Content ] start -->
+<!-- [ employees Content ] start -->
 {% endblock content %}

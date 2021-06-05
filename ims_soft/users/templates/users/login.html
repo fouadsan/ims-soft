@@ -7,30 +7,30 @@
 
 {% block content %}
 <!-- [ auth-signin ] start -->
-<div class="auth-wrapper">
-    <div class="auth-content">
-        <div class="card">
-            <div class="row align-items-center text-center">
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <img src="{% static 'assets/images/logo-dark.png' %}" alt="" class="img-fluid mb-4">
-                        <h4 class="mb-3 f-w-400">Signin</h4>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.non_field_errors }}
-                            <div class="form-group mb-3">
-                                {{ form.username|as_crispy_field }}
-                            </div>
-                            <div class="form-group mb-4">
-                                {{ form.password|as_crispy_field }}
-                            </div>
-                            <button type="submit" class="btn btn-block btn-primary mb-4">Signin</button>
-                        </form>
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="card">
+                <div class="row align-items-center text-center">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <img src="{% static 'assets/images/logo-dark.png' %}" alt="" class="img-fluid mb-4">
+                            <h4 class="mb-3 f-w-400">Sign In</h4>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.non_field_errors }}
+                                <div class="form-group mb-3">
+                                    {{ form.username|as_crispy_field }}
+                                </div>
+                                <div class="form-group mb-4">
+                                    {{ form.password|as_crispy_field }}
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary mb-4">Sign In</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock content %}
 <!-- [ auth-signin ] end -->
+{% endblock content %}

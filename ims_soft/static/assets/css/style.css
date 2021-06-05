@@ -24209,3 +24209,7 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
 .not-visible {
     display: none;
 }
+
+.card-body .table-responsive .table-hover .new_sale-td {
+    line-height: 3;
+}

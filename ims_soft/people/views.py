@@ -1,47 +1,135 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-from .forms import SupplierForm
+from people.utils import load_objects, objects_list_and_create, object_data, update_object, delete_object
+from .forms import SupplierForm, ClientForm, EmployeeForm
 from .models import Supplier
 
 
+@login_required
 def suppliers_list_and_create(request):
     form = SupplierForm(request.POST or None)
     if request.is_ajax():
-        if form.is_valid():
-            instance = form.save()
-            return JsonResponse({
-                'id': instance.id,
-                'name': instance.name,
-                'email': instance.email,
-                'phone': instance.phone,
-                'fax': instance.fax,
-                'address': instance.address
-            })
-
+        return objects_list_and_create(request, form)
+    qs_json = json.dumps(list(Supplier.objects.values()))    
     context = {
-        'form': form,
+        'section_title': 'People',
+        'title': 'Suppliers',
+        'form': form
     }
 
     return render(request, 'people/suppliers.html', context)
 
 
-def load_suppliers(request, num_supps):
+@login_required
+def load_suppliers(request, num):
     if request.is_ajax():
-        visible = 3
-        upper = num_supps
-        lower = upper - visible
-        size = Supplier.objects.all().count()
-        qs = Supplier.objects.all()
-        data = []
-        for obj in qs:
-            item = {
-                'id': obj.id,
-                'name': obj.name,
-                'email': obj.email,
-                'phone': obj.phone,
-                'fax': obj.fax,
-                'address': obj.address
-            }
-            data.append(item)
-        return JsonResponse({'data': data[lower:upper], 'size': size})
+        return load_objects(request, num, "Supplier")
+    return redirect('people:suppliers')
+
+
+@login_required
+def supplier_data(request, pk):
+    if request.is_ajax():
+        return object_data(request, "Supplier", pk)
+    return redirect('people:suppliers')
+
+
+@login_required
+def update_supplier(request, pk):
+    if request.is_ajax():
+        return update_object(request, "Supplier", pk)
+    return redirect('people:suppliers')
+
+
+@login_required
+def delete_supplier(request, pk):
+    if request.is_ajax():
+        return delete_object(request, "Supplier", pk)
+    return redirect('people:suppliers')
+
+
+@login_required
+def clients_list_and_create(request):
+    form = ClientForm(request.POST or None)
+    if request.is_ajax():
+        return objects_list_and_create(request, form)
+
+    context = {
+        'section_title': 'People',
+        'title': 'Clients',
+        'form': form
+    }
+
+    return render(request, 'people/clients.html', context)
+
+
+@login_required
+def load_clients(request, num):
+    if request.is_ajax():
+        return load_objects(request, num, "Client")
+    return redirect('people:clients')
+
+
+@login_required
+def client_data(request, pk):
+    if request.is_ajax():
+        return object_data(request, "Client", pk)
+    return redirect('people:clients')
+
+
+@login_required
+def update_client(request, pk):
+    if request.is_ajax():
+        return update_object(request, "Client", pk)
+    return redirect('people:clients')
+
+
+@login_required
+def delete_client(request, pk):
+    if request.is_ajax():
+        return delete_object(request, "Client", pk)
+    return redirect('people:clients')
+
+
+@login_required
+def employees_list_and_create(request):
+    form = EmployeeForm(request.POST or None)
+    if request.is_ajax():
+        return objects_list_and_create(request, form)
+        
+    context = {
+        'section_title': 'People',
+        'title': 'employees',
+        'form': form
+    }
+
+    return render(request, 'people/employees.html', context)
+
+
+@login_required
+def load_employees(request, num):
+    if request.is_ajax():
+        return load_objects(request, num, "Employee")
+    return redirect('people:employees')
+
+
+@login_required
+def employee_data(request, pk):
+    if request.is_ajax():
+        return object_data(request, "Employee", pk)
+    return redirect('people:employees')
+
+
+@login_required
+def update_empoloyer(request, pk):
+    if request.is_ajax():
+        return update_object(request, "Employee", pk)
+    return redirect('people:employees')
+
+
+@login_required
+def delete_employee(request, pk):
+    if request.is_ajax():
+        return delete_object(request, "Employee", pk)
+    return redirect('people:employees')

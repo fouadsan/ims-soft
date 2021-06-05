@@ -9,17 +9,17 @@
                     <img class="img-radius" src="{% static 'assets/images/user/avatar-2.jpg' %}"
                         alt="User-Profile-Image">
                     <div class="user-details">
-                        <div id="more-details">Administrator <i class="fa fa-caret-down"></i></div>
+                        <div id="more-details">UX Designer <i class="fa fa-caret-down"></i></div>
                     </div>
                 </div>
                 <div class="collapse" id="nav-user-link">
                     <ul class="list-unstyled">
                         <li class="list-group-item">
-                            <a href="{% url 'users:profile' %}"><i class="feather icon-user m-r-5"></i>View Profile</a>
+                            <a href="{% url 'users:profile' %}"><i class="feather icon-user m-r-5"></i>Voir le profil</a>
                         </li>
                         </li>
                         <li class="list-group-item"><a href="auth-normal-sign-in.html"><i
-                                    class="feather icon-log-out m-r-5"></i>Logout</a></li>
+                                    class="feather icon-log-out m-r-5"></i>Déconnexion</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,55 +30,55 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{% url 'dashboard:index' %}" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                                class="feather icon-home"></i></span><span class="pcoded-mtext">Tableau de bord</span></a>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-settings"></i></span><span class="pcoded-mtext">Settings</span></a>
+                                class="feather icon-settings"></i></span><span class="pcoded-mtext">Paramètres</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'dashboard:company' %}">Company Info</a></li>
-                        <li><a href="layout-horizontal.html">Authentication</a></li>
+                        <li><a href="{% url 'dashboard:company' %}">Info Entreprise</a></li>
+                        <li><a href="layout-horizontal.html">Authentification</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-users"></i></span><span class="pcoded-mtext">People</span></a>
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Gens</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'people:suppliers' %}">Suppliers</a></li>
+                        <li><a href="{% url 'people:suppliers' %}">Fournisseurs</a></li>
                         <li><a href="{% url 'people:clients' %}">Clients</a></li>
-                        <li><a href="{% url 'people:employees' %}">Employees</a></li>
+                        <li><a href="{% url 'people:employees' %}">Employés</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-users"></i></span><span class="pcoded-mtext">Products</span></a>
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Produits</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'people:suppliers' %}">Categories</a></li>
-                        <li><a href="{% url 'people:clients' %}">Products</a></li>
+                        <li><a href="{% url 'people:suppliers' %}">Catégories</a></li>
+                        <li><a href="{% url 'people:clients' %}">Produits</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-users"></i></span><span class="pcoded-mtext">Purchases</span></a>
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Achats</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'people:suppliers' %}">New Purchase</a></li>
-                        <li><a href="{% url 'people:clients' %}">Purchase History</a></li>
+                        <li><a href="{% url 'people:suppliers' %}">Nouvel achat</a></li>
+                        <li><a href="{% url 'people:clients' %}">Historique d'achat</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-users"></i></span><span class="pcoded-mtext">Sales</span></a>
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Ventes</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'people:suppliers' %}">New Sale</a></li>
-                        <li><a href="{% url 'people:clients' %}">Sale History</a></li>
+                        <li><a href="{% url 'people:suppliers' %}">Nouvelle vente</a></li>
+                        <li><a href="{% url 'people:clients' %}">Historique de vente</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-users"></i></span><span class="pcoded-mtext">Reports</span></a>
+                                class="feather icon-users"></i></span><span class="pcoded-mtext">Rapports</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="{% url 'people:suppliers' %}">Purchase Report</a></li>
-                        <li><a href="{% url 'people:clients' %}">Sale Report</a></li>
+                        <li><a href="{% url 'people:suppliers' %}">Rapport d'achat</a></li>
+                        <li><a href="{% url 'people:clients' %}">Rapport de vente</a></li>
                     </ul>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
@@ -147,13 +147,13 @@
                         <div class="noti-head">
                             <h6 class="d-inline-block m-b-0">Notifications</h6>
                             <div class="float-right">
-                                <a href="#!" class="m-r-10">mark as read</a>
-                                <a href="#!">clear all</a>
+                                <a href="#!" class="m-r-10">marquer comme lu</a>
+                                <a href="#!">effacer tout</a>
                             </div>
                         </div>
                         <ul class="noti-body">
                             <li class="n-title">
-                                <p class="m-b-0">NEW</p>
+                                <p class="m-b-0">NOUVELLE</p>
                             </li>
                             <li class="notification">
                                 <div class="media">
@@ -167,7 +167,7 @@
                                 </div>
                             </li>
                             <li class="n-title">
-                                <p class="m-b-0">EARLIER</p>
+                                <p class="m-b-0">Plus tôt</p>
                             </li>
                             <li class="notification">
                                 <div class="media">
@@ -219,18 +219,18 @@
                             <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius"
                                 alt="User-Profile-Image">
                             <span>John Doe</span>
-                            <a href="auth-signin.html" class="dud-logout" title="Logout">
+                            <a href="auth-signin.html" class="dud-logout" title="Déconnexion">
                                 <i class="feather icon-log-out"></i>
                             </a>
                         </div>
                         <ul class="pro-body">
                             <li><a href="{% url 'users:profile' %}" class="dropdown-item"><i
                                         class="feather icon-user"></i>
-                                    Profile
+                                    Profil
                                 </a>
                             </li>
-                            <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock
-                                    Screen</a></li>
+                            <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Vérrouiller
+                                    l'écran</a></li>
                         </ul>
                     </div>
                 </div>
