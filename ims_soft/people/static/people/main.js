@@ -66,8 +66,7 @@ const getData = () => {
                             <td id="address-${el.id}">${el.address}</td>
                             <td id="salary-${el.id}">${el.salary}</td>
                             <td id="down_payments-${el.id}">${el.down_payments}</td>
-                            <td>N/A</td>
-                            
+                            <td>N/A</td>                          
                             <td>
                                 <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                                 title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${el.id}">
@@ -88,8 +87,7 @@ const getData = () => {
                             <td id="email-${el.id}">${el.email}</td>
                             <td id="phone-${el.id}">${el.phone}</td>
                             <td id="fax-${el.id}">${el.fax}</td>
-                            <td id="address-${el.id}">${el.address}</td>
-                            
+                            <td id="address-${el.id}">${el.address}</td>                           
                             <td>
                                 <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                                 title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${el.id}">
@@ -181,7 +179,6 @@ createForm.addEventListener('submit', e => {
                             <i class="feather icon-trash"></i>
                         </button>
                     </td>
-                    </td>
                 </tr>
             `) :
                 rowsBox.insertAdjacentHTML('afterbegin', `
@@ -202,7 +199,6 @@ createForm.addEventListener('submit', e => {
                          data-item="${response.id}" data-item-name="${response.name}">
                             <i class="feather icon-trash"></i>
                         </button>
-                    </td>
                     </td>
                 </tr>
             `)
@@ -241,8 +237,7 @@ searchInput.addEventListener('keyup', (e) => {
                     <td id="address-${obj.id}">${obj.address}</td>
                     <td id="salary-${obj.id}">${obj.salary}</td>
                     <td id="down_payments-${obj.id}">${obj.down_payments}</td>
-                    <td>N/A</td>
-                    
+                    <td>N/A</td>                    
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">
@@ -262,8 +257,7 @@ searchInput.addEventListener('keyup', (e) => {
                     <td id="email-${obj.id}">${obj.email}</td>
                     <td id="phone-${obj.id}">${obj.phone}</td>
                     <td id="fax-${obj.id}">${obj.fax}</td>
-                    <td id="address-${obj.id}">${obj.address}</td>
-                    
+                    <td id="address-${obj.id}">${obj.address}</td>                    
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">

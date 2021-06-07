@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'reports/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+Sale Report
+{% endblock title %}
+
+
+{% block content %}
+<!-- [ Sale Report Content ] start -->
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Sale Report</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body justify-content-between">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mt-4">
+                                <label for="datepicker-start" class="d-flex flex-wrap justify-content-center">Start Date</label>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <input type="text" class="text-center" id="datepicker-start" width="412" required/>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 mt-4">
+                                <label for="datepicker-end" class="d-flex flex-wrap justify-content-center">End Date</label>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <input type="text" class="text-center" id="datepicker-end" width="412" required/>
+                                </div>
+                            </div>
+                        </div>                           
+                        <button type="submit" id="" class="btn  btn-primary">Show Report</button>                        	
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+<!-- [ Sale Report Content ] end -->
+{% endblock content %}

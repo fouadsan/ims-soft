@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'sales/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+    New Sale
+{% endblock title %}
+
+{% block content %}
+<!-- [ New Sale Content ] start -->
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>New Sale</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body justify-content-between">
+                    <form>
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <div class="form-group col-md-6">
+                                <label for="inputName" class="d-flex flex-wrap justify-content-center">Customer Name</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">benayad fouad</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLname" class="d-flex flex-wrap justify-content-center">Sale Date</label>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <input type="text" id="datepicker" class="text-center" width="412" style="padding-bottom: 1.2rem;" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>New Sale</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Stock/Qty</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20rem;">
+                                            <div class="input-group">
+                                                <select class="custom-select" id="">
+                                                    <option selected>Choose a product here please.</option>
+                                                    <option value="1">benayad fouad</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        </div>
+                                        <td class="new_sale-td">	                                        	
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>                         
+                                        <td class="new_sale-td">
+                                            <button type="button" class="btn  btn-icon btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Remove">
+                                                <i class="feather icon-x"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex flex-wrap justify-content-center">
+                                            <button type="button" class="btn btn-outline-secondary">
+                                                Add New Item
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Total Discount</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Grand Total</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Paid Amount</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex flex-wrap justify-content-center">
+                                            <button type="button" class="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Left To Pay</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+        
+    </div>
+<!-- [ New Sale Content ] end -->
+{% endblock content %}

@@ -1,0 +1,186 @@
+{% load static %}
+
+{% block scripts %}
+<script src="{% static 'sales/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+    Nouvelle vente
+{% endblock title %}
+
+{% block content %}
+<!-- [ New Sale Content ] start -->
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Nouvelle vente</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximiser</span><span style="display:none"><i class="feather icon-minimize"></i> restaurer</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> s'effondrer</span><span style="display:none"><i class="feather icon-plus"></i> agrandir</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> recharger</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body justify-content-between">
+                    <form>
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <div class="form-group col-md-6">
+                                <label for="inputName" class="d-flex flex-wrap justify-content-center">Nom du client</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choisir...</option>
+                                        <option value="1">benayad fouad</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputLname" class="d-flex flex-wrap justify-content-center">Date de vente</label>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <input type="text" id="datepicker" class="text-center" width="412" style="padding-bottom: 1.2rem;" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Nouvelle vente</h5>
+                    <div class="card-header-right">
+                        <div class="btn-group card-option">
+                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="feather icon-more-horizontal"></i>
+                            </button>
+                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximiser</span><span style="display:none"><i class="feather icon-minimize"></i> restaurer</span></a></li>
+                                <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> s'effondrer</span><span style="display:none"><i class="feather icon-plus"></i> agrandir</span></a></li>
+                                <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> recharger</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Stock/Qté</th>
+                                        <th>Quantité</th>
+                                        <th>Prix unitaire</th>
+                                        <th>Remise</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20rem;">
+                                            <div class="input-group">
+                                                <select class="custom-select" id="">
+                                                    <option selected>Choisir un pproduit ici svp.</option>
+                                                    <option value="1">benayad fouad</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        </div>
+                                        <td class="new_sale-td">	                                        	
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>                         
+                                        <td class="new_sale-td">
+                                            <button type="button" class="btn  btn-icon btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Remove">
+                                                <i class="feather icon-x"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex flex-wrap justify-content-center">
+                                            <button type="button" class="btn btn-outline-secondary">
+                                                Ajouter un nouvel objet
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Remise total</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Grand Total</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Montant payé</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex flex-wrap justify-content-center">
+                                            <button type="button" class="btn btn-primary">
+                                                Valider
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="new_sale-td">Reste à payé</td>
+                                        <td class="new_sale-td">
+                                            <input type="number" class="form-control" id="" readonly>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+        
+    </div>
+<!-- [ New Sale Content ] end -->
+{% endblock content %}
