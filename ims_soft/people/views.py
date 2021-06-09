@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from people.utils import load_objects, objects_list_and_create, object_data, update_object, delete_object
+from .utils import load_objects, objects_list_and_create, object_data, update_object, delete_object
 from .forms import SupplierForm, ClientForm, EmployeeForm
 from .models import Supplier
 

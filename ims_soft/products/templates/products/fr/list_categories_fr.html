@@ -1,0 +1,136 @@
+{% load static %}
+
+{% block content %}
+<!-- [ List Categories Content ] start -->
+
+<!-- Create Category Modal -->
+<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel">Créer une categorie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div id="alertModal-box"></div>
+                <form id="create-form" autocomplete="off">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="">
+                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" id="add-btn" class="btn  btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update  Modal -->
+<div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel2">Mettre à jour la categorie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-form" autocomplete="off">
+                    {% csrf_token %}
+                    {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete  start -->
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Supprimer la categorie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="delMsg" class="mb-0">Etes-vous sûr que vous voulez supprimer: </p>
+            </div>
+            <div class="modal-footer">
+                <form id="delete-form">
+                    {% csrf_token %}
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn  btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <!-- [ sample-page ] start -->
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-header">
+                <h5>Categories</h5>
+                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#addModal"> Ajouter +
+                </button>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i>
+                                        maximiser</span><span style="display:none"><i class="feather icon-minimize"></i>
+                                        restaurer</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#!"><span><i
+                                            class="feather icon-minus"></i> s'effondrer</span><span style="display:none"><i
+                                            class="feather icon-plus"></i> agrandir</span></a>
+                            </li>
+                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i>
+                                    recharger</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-border-style">
+                <div class="d-flex flex-wrap justify-content-center mb-3">
+                    <div class="col-sm-6">
+                        <input id="search-input" type="text" class="form-control" placeholder="Search here...">
+                    </div>
+                </div>
+                <div id="alert-box"></div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Categorie</th>
+                                <th>Produit/Cat</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rows-box"></tbody>
+                    </table>
+                    <div id="spinner-box" class="text-center">
+                        <div class="spinner-border mb-3" role="status"></div>
+                    </div>
+                    <div class="text-center mb-3" id="end-box">
+                        <button class="btn btn-primary" id="load-btn">Charger plus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ sample-page ] end -->
+</div>
+<!-- [ List Categories Content ] start -->
+{% endblock content %}
