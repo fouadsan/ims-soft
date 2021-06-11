@@ -14,6 +14,10 @@ const handleModalAlerts = (type, msg) => {
     `
 }
 
+const handleDateTimePicker = (id) => {
+    $(id).datetimepicker({
+        modal: true,
+        footer: true,
+    });
+}
 
-//Checks countries.result for an object with a property of 'id' whose value is 'AF'
-//Then removes it ;p

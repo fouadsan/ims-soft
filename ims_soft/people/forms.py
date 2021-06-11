@@ -1,8 +1,9 @@
 from django import forms
-
-from .models import Client, Employee, Supplier
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Submit
+
+from .models import Client, Employee, Supplier
+
 
 class SupplierForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

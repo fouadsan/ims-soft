@@ -9,7 +9,12 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('profile/', include('users.urls')),
     path('people/', include('people.urls')),
+    path('products/', include('products.urls')),
+    path('purchases/', include('purchases.urls')),
+    path('sales/', include('sales.urls')),
+    path('stock/', include('stock.urls')),
+    path('reports/', include('reports.urls'))
 ]
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

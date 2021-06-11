@@ -1,13 +1,19 @@
 from django.db import models
 
 
-class Supplier(models.Model):
-
+class CustSupp(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
     fax = models.CharField(max_length=13, blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class Supplier(CustSupp):
+    pass
 
     def __str__(self):
         return f"Supplier: {self.name}"
@@ -15,13 +21,8 @@ class Supplier(models.Model):
     class Meta:
         ordering = ("-id",)
 
-class Client(models.Model):
-
-    name = models.CharField(max_length=200)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=13, blank=True, null=True)
-    fax = models.CharField(max_length=13, blank=True, null=True)
-    address = models.CharField(max_length=100, blank=True, null=True)
+class Client(CustSupp):
+    pass
 
     def __str__(self):
         return f"Client: {self.name}"

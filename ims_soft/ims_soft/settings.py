@@ -41,9 +41,15 @@ INSTALLED_APPS = [
     'users',
     'dashboard',
     'people',
+    'products',
+    'purchases',
+    'sales',
+    'stock',
+    'reports',
 
     # Third party apps
     'crispy_forms',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +76,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'people.template_context.get_context',
+                'products.template_context.get_context',
+                'stock.template_context.get_context',
             ],
         },
     },
@@ -130,7 +138,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'dashboard' / 'static',
     BASE_DIR / 'users' / 'static',
-    BASE_DIR / 'clients' / 'static',
+    BASE_DIR / 'people' / 'static',
+    BASE_DIR / 'products' / 'static',
+    BASE_DIR / 'purchases' / 'static',
+    BASE_DIR / 'sales' / 'static',
+    BASE_DIR / 'stock' / 'static',
+    BASE_DIR / 'reports' / 'static'
 ]
 
 MEDIA_URL = '/media/'
