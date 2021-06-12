@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
-from .utils import load_objects, objects_list_and_create, object_data, update_object, delete_object
+from .utils import load_objects, objects_list_and_create, object_data, update_object, delete_object, \
+    delete_selected_objects
 from .forms import ProductForm, CategoryForm
+from .resources import ProductResource
 
 
 @login_required
@@ -46,6 +49,12 @@ def delete_category(request, pk):
     return redirect('products:categories')
 
 
+def delete_selected_categories(request):
+    if request.is_ajax():
+        return delete_selected_objects(request, "Category")
+    return redirect('products:categories')
+
+
 def products_list_and_create(request):
     form = ProductForm(request.POST or None)
     if request.is_ajax():
@@ -85,3 +94,16 @@ def delete_product(request, pk):
         return delete_object(request, "Product", pk)
     return redirect('products:products')
 
+
+def delete_selected_products(request):
+    if request.is_ajax():
+        return delete_selected_objects(request, "Product")
+    return redirect('products:products')
+
+
+def export_csv(request):
+    product_resource = ProductResource()
+    dataset = product_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="products.csv"'
+    return response

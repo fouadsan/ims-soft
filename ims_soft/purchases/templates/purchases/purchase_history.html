@@ -3,50 +3,25 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-<script src="{% static 'people/main.js' %}" defer></script>
-<script src="{% static 'people/actions.js' %}" defer></script>
+<script src="{% static 'purchases/main.js' %}" defer></script>
+<script src="{% static 'purchases/actions.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
-Clients
+Purchases
 {% endblock title %}
 
 
 {% block content %}
-<!-- [ Clients Content ] start -->
+<!-- [ Purchase History Content ] start -->
 
-<!-- Create Clients Modal -->
-<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Create Client</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div id="alertModal-box"></div>
-                <form id="create-form" autocomplete="off">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <div class="">
-                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="add-btn" class="btn  btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Update Client Modal -->
+<!-- Update Modal -->
 <div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Client</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel1">Update Status</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -60,18 +35,18 @@ Clients
     </div>
 </div>
 
-<!-- Delete client Modal start -->
+<!-- Delete  start -->
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Client</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Purchase</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p class="mb-0">Are you sure you want to delete: </p>
+                <p class="mb-2">Are you sure you want to delete: </p>
                 <p id="delMsgName"></p>
             </div>
             <div class="modal-footer">
@@ -91,7 +66,7 @@ Clients
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel4">Delete Selected Clients</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel4">Delete Selected Purchases</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -114,15 +89,15 @@ Clients
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Clients</h5>
+                <h5>Purchase History</h5>
                 <div class="d-flex flex-wrap justify-content-around mt-3">
                     <div>
-                        <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#addModal">
-                            Add Client
-                        </button>
                         <button type="button" class="btn btn-danger" id="delete-selected-btn" data-toggle="modal"
                             data-target="#deleteSelectedModal">Delete Selection
                         </button>
+                    </div>
+                    <div>
+                        <a href="{% url 'purchases:export-csv' %}" class="btn btn-info mr-3">Export .Csv</a>
                     </div>
                 </div>
                 <div class="card-header-right">
@@ -158,11 +133,12 @@ Clients
                             <tr>
                                 <th>#</th>
                                 <th>N°</th>
-                                <th>Client Name</th>
-                                <th>Email</th>
-                                <th>Phone N°</th>
-                                <th>Fax N°</th>
-                                <th>Address</th>
+                                <th>Supplier</th>
+                                <th>Purchase Date</th>
+                                <th>Status</th>
+                                <th>Grand Total</th>
+                                <th>Payment</th>
+                                <th>Purchased By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -180,5 +156,5 @@ Clients
     </div>
     <!-- [ sample-page ] end -->
 </div>
-<!-- [ Clients Content ] end -->
+<!-- [ Purchase History Content ] end -->
 {% endblock content %}

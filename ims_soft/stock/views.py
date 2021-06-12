@@ -7,10 +7,7 @@ from xhtml2pdf import context
 from .models import Barcode, ProductStock
 from .forms import StockForm
 from .utils import get_status, render_to_pdf
-from .ressources import  ProductStockResource
-
-
-
+from .resources import ProductStockResource
 
 
 def stock_list(request):
@@ -23,7 +20,7 @@ def stock_list(request):
     return render(request, 'stock/list_stock.html', context)
 
 
-@login_required 
+@login_required
 def load_stock(request, num):
     if request.is_ajax():
         visible = 5
@@ -37,7 +34,7 @@ def load_stock(request, num):
             barcode = Barcode.objects.get(product=obj.id)
             item = {
                 'id': obj.id,
-                'product': obj.product.name,                   
+                'product': obj.product.name,
                 'quantity': obj.quantity,
                 'buy_price': obj.buy_price,
                 'sale_price': obj.sale_price,
@@ -47,19 +44,19 @@ def load_stock(request, num):
                 'barcode_digit': barcode.barcode_digit
             }
             data.append(item)
-        
-        return JsonResponse({'data': data[lower:upper], 'size': size })
+
+        return JsonResponse({'data': data[lower:upper], 'size': size})
 
 
 @login_required
 def update_stock(request, pk):
     if request.is_ajax():
-       obj = ProductStock.objects.get(pk=pk)
-       new_reorder_level = request.POST.get('reorder_level')
-       obj.reorder_level = new_reorder_level
-       get_status(obj)
-       return JsonResponse({
-          'status': obj.status
+        obj = ProductStock.objects.get(pk=pk)
+        new_reorder_level = request.POST.get('reorder_level')
+        obj.reorder_level = new_reorder_level
+        get_status(obj)
+        return JsonResponse({
+            'status': obj.status
         })
 
     return redirect('stock:stock-list')
@@ -72,14 +69,14 @@ def stock_data(request, pk):
         barcode = Barcode.objects.get(product=obj.id)
         data = {
             'id': obj.id,
-            'reorder_level': obj.reorder_level,  
+            'reorder_level': obj.reorder_level,
             'status': obj.status,
-            'barcode_img': barcode.barcode_img.url           
+            'barcode_img': barcode.barcode_img.url
         }
         return JsonResponse({'data': data})
 
     return redirect('stock:stock-list')
-    
+
 
 # data = {
 # 	"company": "Dennnis Ivanov Company",
@@ -94,17 +91,18 @@ def stock_data(request, pk):
 # 	"website": "dennisivy.com",
 # 	}
 
-#Opens up page as PDF
+# Opens up page as PDF
 qs = Barcode.objects.all()
 data = {}
-for obj in qs: 
+for obj in qs:
 
     item = {
         'id': obj.id,
         'barcode_digit': obj.barcode_digit,
         'barcode_img': obj.barcode_img
     }
-data.update(item)
+    data.update(item)
+
 
 class ViewPDF(View):
 

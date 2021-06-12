@@ -62,7 +62,7 @@ const getData = () => {
                             <td id="barcode_digit-${el.id}">
                                 ${el.barcode_digit}
                                 <button type="button" id="printView-btn" class="btn btn-icon btn-outline-secondary"
-                                title="Edit" data-toggle="modal" data-target="#printModal" data-item="${el.id}">
+                                title="Print" data-toggle="modal" data-target="#printModal" data-item="${el.id}">
                                 <i class="feather icon-printer"></i>
                                 </button>
                             </td>                           
@@ -110,8 +110,8 @@ searchInput.addEventListener('keyup', (e) => {
             obj.quantity ? obj.quantity : obj.quantity = "N/A"
             obj.buy_price ? obj.buy_price : obj.buy_price = "N/A"
             obj.sale_price ? obj.sale_price : obj.sale_price = "N/A"
-            
-            rowsBox.innerHTML +=`
+
+            rowsBox.innerHTML += `
                 <tr>
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="product-${obj.id}">${obj.product}</td>
@@ -129,8 +129,8 @@ searchInput.addEventListener('keyup', (e) => {
                     <td id="barcode_digit-${obj.id}">
                         ${obj.barcode_digit}
                         <button type="button" id="printView-btn" class="btn btn-icon btn-outline-secondary"
-                        title="Edit" data-toggle="modal" data-target="#printModal" data-item="${obj.id}">
-                        <i class="feather icon-edit"></i>
+                        title="Print" data-toggle="modal" data-target="#printModal" data-item="${obj.id}">
+                        <i class="feather icon-printer"></i>
                         </button>
                     </td> 
                 </tr>
@@ -149,4 +149,4 @@ searchInput.addEventListener('keyup', (e) => {
     }
 })
 
-getData() 
+getData()

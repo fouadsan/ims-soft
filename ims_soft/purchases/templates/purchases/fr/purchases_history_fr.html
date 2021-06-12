@@ -3,50 +3,25 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-<script src="{% static 'people/main.js' %}" defer></script>
-<script src="{% static 'people/actions.js' %}" defer></script>
+<script src="{% static 'purchases/main.js' %}" defer></script>
+<script src="{% static 'purchases/actions.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
-Clients
+Purchases
 {% endblock title %}
 
 
 {% block content %}
-<!-- [ Clients Content ] start -->
+<!-- [ Purchase History Content ] start -->
 
-<!-- Create Clients Modal -->
-<div id="createModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Create Client</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div id="alertModal-box"></div>
-                <form id="create-form" autocomplete="off">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <div class="">
-                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="add-btn" class="btn  btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Update Client Modal -->
+<!-- Update Modal -->
 <div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel2">Update Client</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel1">Mettre à jour le status</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -60,25 +35,25 @@ Clients
     </div>
 </div>
 
-<!-- Delete client Modal start -->
+<!-- Delete  start -->
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel3">Delete Client</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Supprimer l'achat</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p class="mb-0">Are you sure you want to delete: </p>
+                <p class="mb-2">Etes-vous sûr que vous voulez supprimer: </p>
                 <p id="delMsgName"></p>
             </div>
             <div class="modal-footer">
                 <form id="delete-form">
                     {% csrf_token %}
-                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn  btn-danger">Delete</button>
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn  btn-danger">Supprimer</button>
                 </form>
             </div>
         </div>
@@ -91,7 +66,7 @@ Clients
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel4">Delete Selected Clients</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel4">Supprimer les achats sélectionné</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -101,7 +76,7 @@ Clients
             <div class="modal-footer">
                 <form id="delete-selected-form">
                     {% csrf_token %}
-                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
                     <button type="submit" class="btn  btn-danger" id="submitDelSel">Ok</button>
                 </form>
             </div>
@@ -114,15 +89,15 @@ Clients
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Clients</h5>
+                <h5>Historique d'achat</h5>
                 <div class="d-flex flex-wrap justify-content-around mt-3">
                     <div>
-                        <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#addModal">
-                            Add Client
-                        </button>
                         <button type="button" class="btn btn-danger" id="delete-selected-btn" data-toggle="modal"
-                            data-target="#deleteSelectedModal">Delete Selection
+                            data-target="#deleteSelectedModal">Supprimer la séelection
                         </button>
+                    </div>
+                    <div>
+                        <a href="{% url 'purchases:export-csv' %}" class="btn btn-info mr-3">Exporter .Csv</a>
                     </div>
                 </div>
                 <div class="card-header-right">
@@ -133,14 +108,14 @@ Clients
                         </button>
                         <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i>
-                                        maximize</span><span style="display:none"><i class="feather icon-minimize"></i>
-                                        Restore</span></a></li>
+                                        maximiser</span><span style="display:none"><i class="feather icon-minimize"></i>
+                                        Restaurer</span></a></li>
                             <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                            class="feather icon-minus"></i> collapse</span><span style="display:none"><i
-                                            class="feather icon-plus"></i> expand</span></a>
+                                            class="feather icon-minus"></i> s'effondrer</span><span
+                                        style="display:none"><i class="feather icon-plus"></i> agrandir</span></a>
                             </li>
                             <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i>
-                                    reload</a></li>
+                                    recharger</a></li>
                         </ul>
                     </div>
                 </div>
@@ -158,11 +133,12 @@ Clients
                             <tr>
                                 <th>#</th>
                                 <th>N°</th>
-                                <th>Client Name</th>
-                                <th>Email</th>
-                                <th>Phone N°</th>
-                                <th>Fax N°</th>
-                                <th>Address</th>
+                                <th>Fournisseur</th>
+                                <th>Date d'achat</th>
+                                <th>status</th>
+                                <th>Grand Totale</th>
+                                <th>Paiment</th>
+                                <th>Acheter par</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -172,7 +148,7 @@ Clients
                         <div class="spinner-border mb-3" role="status"></div>
                     </div>
                     <div class="text-center mb-3" id="end-box">
-                        <button class="btn btn-primary" id="load-btn">Load more</button>
+                        <button class="btn btn-primary" id="load-btn">Charger plus</button>
                     </div>
                 </div>
             </div>
@@ -180,5 +156,5 @@ Clients
     </div>
     <!-- [ sample-page ] end -->
 </div>
-<!-- [ Clients Content ] end -->
+<!-- [ Purchase History Content ] end -->
 {% endblock content %}

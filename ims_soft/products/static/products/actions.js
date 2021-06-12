@@ -1,11 +1,13 @@
- // const backBtn = document.getElementById('back-btn')
+// const backBtn = document.getElementById('back-btn')
 
 const url = "data/"
 const updateUrl = window.location.href + "update/"
 const deleteUrl = window.location.href + "delete/"
+const deleteSelectedUrl = window.location.href + "delete-selected/"
 
 const updateForm = document.getElementById('update-form')
 const deleteForm = document.getElementById('delete-form')
+const deleteSelectedForm = document.getElementById('delete-selected-form')
 
 // const spinnerBox = document.getElementById('spinner-box')
 
@@ -15,6 +17,7 @@ const categoryInput = document.getElementById('id_updateCategory')
 
 var globalVariableUp;
 var globalVariableDel;
+var globalVariableSelDel;
 // backBtn.addEventListener('click', ()=>{
 //     history.back()
 // })
@@ -90,10 +93,10 @@ $(document).on('click', '#delete-btn', function () {
     const delName = $(this).attr('data-item-name');
     globalVariableDel = delId
 
-    var delMsg = document.getElementById("delMsg");
-    delMsg.insertAdjacentHTML('afterend', `<b>${delName}</b>`);
-
+    var delMsgName = document.getElementById("delMsgName");
+    delMsgName.innerHTML = `<b>${delName}</b>`
 })
+
 
 deleteForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -110,15 +113,59 @@ deleteForm.addEventListener('submit', e => {
             'csrfmiddlewaretoken': csrf[0].value,
         },
         success: function (response) {
-            id.parentNode.remove()
+            $('tr#' + localDelId + '').fadeOut('slow');
             searchInput.value = ""
             $('#deleteModal').modal('hide')
             handleAlerts('success', response.msg)
             localStorage.setItem('name', nameInput.value)
-            getData()
+
         },
         error: function (error) {
             console.log(error)
+        }
+    })
+})
+
+$(document).on('click', '#delete-selected-btn', e => {
+    e.preventDefault()
+    var id_list = [];
+    var delSelMsg = document.getElementById("delSelMsg");
+    var submitDelSel = document.getElementById("submitDelSel")
+    $(':checkbox:checked').each(function (i) {
+        id_list[i] = $(this).val()
+    })
+    if (id_list.length === 0) {
+        delSelMsg.textContent = "Please select items to delete !"
+        submitDelSel.classList.add('not-visible')
+    }
+    else {
+        delSelMsg.textContent = "Are you sure you want to delete this items ?"
+        submitDelSel.classList.remove('not-visible')
+    }
+
+})
+
+deleteSelectedForm.addEventListener('submit', e => {
+    e.preventDefault()
+    var id_list = [];
+    $(':checkbox:checked').each(function (i) {
+        id_list[i] = $(this).val()
+    })
+    $.ajax({
+        url: deleteSelectedUrl,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': csrf[0].value,
+            id_list
+        },
+        success: function (response) {
+            $('input[type=checkbox]').prop('checked', false);
+            $('#deleteSelectedModal').modal('hide')
+            for (var i = 0; i < id_list.length; i++) {
+                // $('tr#' + id[i] + '').css('background-color:',)
+                $('tr#' + id_list[i] + '').fadeOut('slow');
+            }
+            handleAlerts('success', response.msg)
         }
     })
 })

@@ -2,6 +2,7 @@ from django.http import JsonResponse
 
 from .models import Supplier, Client, Employee
 
+
 def objects_list_and_create(request, form):
     instance = form.save()
     print(instance)
@@ -13,7 +14,7 @@ def objects_list_and_create(request, form):
             'salary': instance.salary,
             'down_payments': instance.down_payments
         })
-    else :
+    else:
         return JsonResponse({
             'id': instance.id,
             'name': instance.name,
@@ -22,7 +23,7 @@ def objects_list_and_create(request, form):
             'fax': instance.fax,
             'address': instance.address
         })
-    
+
 
 def load_objects(request, num_objs, model):
     model = eval(model)
@@ -36,7 +37,7 @@ def load_objects(request, num_objs, model):
         if model == Employee:
             item = {
                 'id': obj.id,
-                'name': obj.name,                   
+                'name': obj.name,
                 'phone': obj.phone,
                 'address': obj.address,
                 'salary': obj.salary,
@@ -44,13 +45,13 @@ def load_objects(request, num_objs, model):
             }
         else:
             item = {
-                    'id': obj.id,
-                    'name': obj.name,
-                    'email': obj.email,
-                    'phone': obj.phone,
-                    'fax': obj.fax,
-                    'address': obj.address
-                }
+                'id': obj.id,
+                'name': obj.name,
+                'email': obj.email,
+                'phone': obj.phone,
+                'fax': obj.fax,
+                'address': obj.address
+            }
         data.append(item)
     return JsonResponse({'data': data[lower:upper], 'size': size})
 
@@ -67,7 +68,7 @@ def object_data(request, model, pk):
             'salary': obj.salary,
             'down_payments': obj.down_payments,
         }
-    else :
+    else:
         data = {
             'id': obj.id,
             'name': obj.name,
@@ -78,10 +79,11 @@ def object_data(request, model, pk):
         }
     return JsonResponse({'data': data})
 
+
 def update_object(request, model, pk):
     model = eval(model)
     obj = model.objects.get(pk=pk)
- 
+
     if model == Employee:
         new_name = request.POST.get('name')
         new_phone = request.POST.get('phone')
@@ -101,7 +103,7 @@ def update_object(request, model, pk):
             'salary': new_salary,
             'down_payments': new_down_payments
         })
-    else :
+    else:
         new_name = request.POST.get('name')
         new_email = request.POST.get('email')
         new_phone = request.POST.get('phone')
@@ -120,10 +122,19 @@ def update_object(request, model, pk):
             'fax': new_fax,
             'address': new_address
         })
-    
+
 
 def delete_object(request, model, pk):
     model = eval(model)
     obj = model.objects.get(pk=pk)
     obj.delete()
-    return JsonResponse({'msg':'Object has been deleted'})
+    return JsonResponse({'msg': 'Object has been deleted'})
+
+
+def delete_selected_objects(request, model):
+    model = eval(model)
+    object_ids = request.POST.getlist(('id_list[]'))
+    for id in object_ids:
+        obj = model.objects.get(pk=id)
+        obj.delete()
+    return JsonResponse({'msg': 'Objects have been deleted'})

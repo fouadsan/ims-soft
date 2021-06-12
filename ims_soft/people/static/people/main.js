@@ -2,6 +2,8 @@ const rowsBox = document.getElementById('rows-box')
 const spinnerBox = document.getElementById('spinner-box')
 const actionBtn = document.getElementById('action-btn')
 const loadBtn = document.getElementById('load-btn')
+const deleteSelectedBtn = document.getElementById('delete-selected-btn')
+
 const endBox = document.getElementById('end-box')
 
 const createForm = document.getElementById('create-form')
@@ -59,7 +61,8 @@ const getData = () => {
 
                     el.salary ?
                         rowsBox.innerHTML += `
-                        <tr>
+                        <tr id="${el.id}">
+                            <th scope="row"><input type="checkbox" value="${el.id}"/></th>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="phone-${el.id}">${el.phone}</td>
@@ -81,7 +84,8 @@ const getData = () => {
                         </tr>
                     `:
                         rowsBox.innerHTML += `
-                        <tr>
+                        <tr id="${el.id}">
+                            <th scope="row"><input type="checkbox" value="${el.id}"/></th>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="email-${el.id}">${el.email}</td>
@@ -160,14 +164,15 @@ createForm.addEventListener('submit', e => {
 
             response.salary ?
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr>
-                <td id="id-${response.id}">${response.id}</td>
-                <td id="name-${response.id}">${response.name}</td>
-                <td id="phone-${response.id}">${response.phone}</td>
-                <td id="address-${response.id}">${response.address}</td>
-                <td id="salary-${response.id}">${response.salary}</td>
-                <td id="down_payments-${response.id}">${response.down_payments}</td>
-                <td>N/A</td>
+                <tr id="${response.id}">
+                    <th scope="row"><input type="checkbox" value="${response.id}"/></th>
+                    <td id="id-${response.id}">${response.id}</td>
+                    <td id="name-${response.id}">${response.name}</td>
+                    <td id="phone-${response.id}">${response.phone}</td>
+                    <td id="address-${response.id}">${response.address}</td>
+                    <td id="salary-${response.id}">${response.salary}</td>
+                    <td id="down_payments-${response.id}">${response.down_payments}</td>
+                    <td>N/A</td>
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
@@ -175,20 +180,21 @@ createForm.addEventListener('submit', e => {
                         </button>&nbsp;
                         <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
                         title="Remove" data-toggle="modal" data-target="#deleteModal"
-                         data-item="${response.id}" data-item-name="${response.name}">
+                        data-item="${response.id}" data-item-name="${response.name}">
                             <i class="feather icon-trash"></i>
                         </button>
                     </td>
                 </tr>
             `) :
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr>
-                <td id="id-${response.id}">${response.id}</td>
-                <td id="name-${response.id}">${response.name}</td>
-                <td id="email-${response.id}">${response.email}</td>
-                <td id="phone-${response.id}">${response.phone}</td>
-                <td id="fax-${response.id}">${response.fax}</td>
-                <td id="address-${response.id}">${response.address}</td>
+                <tr id="${response.id}">
+                    <th scope="row"><input type="checkbox" value="${response.id}"/></th>
+                    <td id="id-${response.id}">${response.id}</td>
+                    <td id="name-${response.id}">${response.name}</td>
+                    <td id="email-${response.id}">${response.email}</td>
+                    <td id="phone-${response.id}">${response.phone}</td>
+                    <td id="fax-${response.id}">${response.fax}</td>
+                    <td id="address-${response.id}">${response.address}</td>
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
@@ -196,7 +202,7 @@ createForm.addEventListener('submit', e => {
                         </button>&nbsp;
                         <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
                         title="Remove" data-toggle="modal" data-target="#deleteModal"
-                         data-item="${response.id}" data-item-name="${response.name}">
+                            data-item="${response.id}" data-item-name="${response.name}">
                             <i class="feather icon-trash"></i>
                         </button>
                     </td>
@@ -230,7 +236,8 @@ searchInput.addEventListener('keyup', (e) => {
             obj.salary ?
                 rowsBox.innerHTML +=
                 `
-                <tr>
+                <tr id="${obj.id}">
+                    <th scope="row"><input type="checkbox" value="${obj.id}"/></th>
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
                     <td id="phone-${obj.id}">${obj.phone}</td>
@@ -251,7 +258,8 @@ searchInput.addEventListener('keyup', (e) => {
                     </td>
                 </tr>
             `: rowsBox.innerHTML += `
-                <tr>
+                <tr id="${obj.id}">
+                    <th scope="row"><input type="checkbox" value="${obj.id}"/></th>
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
                     <td id="email-${obj.id}">${obj.email}</td>

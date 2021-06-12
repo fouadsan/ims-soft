@@ -23,6 +23,7 @@ def profile_view(request):
                 'city': instance.city
             })
     context = {
+        'section_title': 'Users',
         'title': 'Profile',
         'obj': obj,
         'form': form

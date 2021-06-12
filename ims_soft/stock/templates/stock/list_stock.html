@@ -3,12 +3,12 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-    <script src="{% static 'stock/main.js' %}" defer></script>
-    <script src="{% static 'stock/actions.js' %}" defer></script>
+<script src="{% static 'stock/main.js' %}" defer></script>
+<script src="{% static 'stock/actions.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
-    Stock List
+Stock List
 {% endblock title %}
 
 
@@ -49,7 +49,7 @@
                 <div id="spinner-modal" class="text-center">
                     <div class="spinner-border mb-3" role="status"></div>
                 </div>
-                <form id="print-form" class="printform"></div>
+                <form id="print-form" class="printform">
             </div>
         </div>
     </div>
@@ -61,7 +61,12 @@
         <div class="card">
             <div class="card-header">
                 <h5>Stock</h5>
-                <a href="{% url 'stock:export-csv' %}" class="btn btn-info">Export to csv</a>
+                <div class="d-flex flex-wrap justify-content-around mt-3">
+
+                    <div>
+                        <a href="{% url 'stock:export-csv' %}" class="btn btn-info">Export .Csv</a>
+                    </div>
+                </div>
                 <div class="card-header-right">
                     <div class="btn-group card-option">
                         <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
@@ -89,7 +94,6 @@
                     </div>
                 </div>
                 <div id="alert-box"></div>
-                <a href="{% url 'stock:pdf-view' %}" class="btn btn-info">Export to pdf</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -118,5 +122,5 @@
     </div>
     <!-- [ sample-page ] end -->
 </div>
-<!-- [ List Stock Content ] start -->
+<!-- [ List Stock Content ] end -->
 {% endblock content %}

@@ -2,134 +2,169 @@
 
 <!-- [ Suppliers Content ] French start -->
 
-    <!-- Create Supplier Modal -->
-    <div id="addModal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLiveLabel">Créer un fournisseur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div id="alertModal-box"></div>
-                    <form id="create-form" autocomplete="off">
-                        {% csrf_token %}
-                        {{form|crispy}}
-                        <div class="">
-                            <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" id="add-btn" class="btn  btn-primary">Sauvgarder</button>
-                        </div>
-                    </form>
-                </div>
+<!-- Create Supplier Modal -->
+<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel">Créer un fournisseur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             </div>
-        </div>
-    </div>
-
-    <!-- Update  Modal -->
-    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLiveLabel2">Mettre à jour le fournisseur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <form id="update-form" autocomplete="off">
-                        {% csrf_token %}
-                        {% crispy form %}
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete  start -->            
-    <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLiveLabel3">Supprimer le fournisseur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <p id="delMsg" class="mb-0">Etes-vous sûr que vous voulez supprimer: </p>
-                </div>
-                <div class="modal-footer">
-                    <form id="delete-form">
-                        {% csrf_token %}
+            <div class="modal-body">
+                <div id="alertModal-box"></div>
+                <form id="create-form" autocomplete="off">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <div class="">
                         <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn  btn-danger">Supprimer</button>
-                    </form>
-                </div>
+                        <button type="submit" id="add-btn" class="btn  btn-primary">Sauvgarder</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <!-- [ sample-page ] start -->
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Suppliers</h5>
-                    <button type="button" class="btn  btn-success" data-toggle="modal"
-                        data-target="#addModal"> add + </button>
-                    <div class="card-header-right">
-                        <div class="btn-group card-option">
-                            <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="feather icon-more-horizontal"></i>
-                            </button>
-                            <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                class="feather icon-maximize"></i> maximize</span><span
-                                            style="display:none"><i class="feather icon-minimize"></i>
-                                            Restore</span></a></li>
-                                <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                class="feather icon-minus"></i> collapse</span><span
-                                            style="display:none"><i class="feather icon-plus"></i> expand</span></a>
-                                </li>
-                                <li class="dropdown-item reload-card"><a href="#!"><i
-                                            class="feather icon-refresh-cw"></i> reload</a></li>
-                            </ul>
-                        </div>
+<!-- Update  Modal -->
+<div id="updateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel2">Mettre à jour le fournisseur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-form" autocomplete="off">
+                    {% csrf_token %}
+                    {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete  start -->
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel3"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel3">Supprimer le fournisseur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Etes-vous sûr que vous voulez supprimer: </p>
+                <p id="delMsgName"></p>
+            </div>
+            <div class="modal-footer">
+                <form id="delete-form">
+                    {% csrf_token %}
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn  btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Selected start -->
+<div id="deleteSelectedModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel4"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel4">Supprimer les fournisseurs sélectionés</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="delSelMsg" class="mb-0"></p>
+            </div>
+            <div class="modal-footer">
+                <form id="delete-selected-form">
+                    {% csrf_token %}
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn  btn-danger" id="submitDelSel">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- [ sample-page ] start -->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Suppliers</h5>
+                <div class="d-flex flex-wrap justify-content-around mt-3">
+                    <div>
+                        <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#addModal">
+                            Ajouter un fournisseur
+                        </button>
+                        <button type="button" class="btn btn-danger" id="delete-selected-btn" data-toggle="modal"
+                            data-target="#deleteSelectedModal">Supprimer la sélection
+                        </button>
                     </div>
                 </div>
-                <div class="card-body table-border-style">
-                    <div class="d-flex flex-wrap justify-content-center mb-3">
-                        <div class="col-sm-6">
-                            <input id="search-input" type="text" class="form-control" placeholder="Recherchez ici...">
-                        </div>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i>
+                                        maximize</span><span style="display:none"><i class="feather icon-minimize"></i>
+                                        Restore</span></a></li>
+                            <li class="dropdown-item minimize-card"><a href="#!"><span><i
+                                            class="feather icon-minus"></i> collapse</span><span style="display:none"><i
+                                            class="feather icon-plus"></i> expand</span></a>
+                            </li>
+                            <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i>
+                                    reload</a></li>
+                        </ul>
                     </div>
-                    <div id="alert-box"></div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Vendor Name</th>
-                                    <th>Email</th>
-                                    <th>Phone N°</th>
-                                    <th>Fax N°</th>
-                                    <th>Address</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="rows-box"></tbody>
-                        </table>
-                        <div id="spinner-box" class="text-center">
-                            <div class="spinner-border mb-3" role="status"></div>
-                        </div>
-                        <div class="text-center mb-3" id="end-box">
-                            <button class="btn btn-primary" id="load-btn">Load more</button>
-                        </div>
+                </div>
+            </div>
+            <div class="card-body table-border-style">
+                <div class="d-flex flex-wrap justify-content-center mb-3">
+                    <div class="col-sm-6">
+                        <input id="search-input" type="text" class="form-control" placeholder="Recherchez ici...">
+                    </div>
+                </div>
+                <div id="alert-box"></div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>N°</th>
+                                <th>Nom de fournisseur</th>
+                                <th>Email</th>
+                                <th>N° du téléphone</th>
+                                <th>Fax N°</th>
+                                <th>Addresse</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rows-box"></tbody>
+                    </table>
+                    <div id="spinner-box" class="text-center">
+                        <div class="spinner-border mb-3" role="status"></div>
+                    </div>
+                    <div class="text-center mb-3" id="end-box">
+                        <button class="btn btn-primary" id="load-btn">Load more</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- [ sample-page ] end -->
     </div>
+    <!-- [ sample-page ] end -->
+</div>
 <!-- [ Suppliers Content ] French start -->

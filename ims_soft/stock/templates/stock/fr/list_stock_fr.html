@@ -36,8 +36,27 @@
                 <div id="spinner-modal" class="text-center">
                     <div class="spinner-border mb-3" role="status"></div>
                 </div>
-                <form id="print-form" class="printform"></div>
+                <form id="print-form" class="printform">
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Print Modal -->
+<div id="printModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel2">Imprimer code à barre </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div id="spinner-modal" class="text-center">
+                    <div class="spinner-border mb-3" role="status"></div>
+                </div>
+                <form id="print-form" class="printform">
             </div>
         </div>
     </div>
@@ -49,6 +68,12 @@
         <div class="card">
             <div class="card-header">
                 <h5>Stock</h5>
+                <div class="d-flex flex-wrap justify-content-around mt-3">
+
+                    <div>
+                        <a href="{% url 'stock:export-csv' %}" class="btn btn-info">Exporter .Csv</a>
+                    </div>
+                </div>
                 <div class="card-header-right">
                     <div class="btn-group card-option">
                         <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
@@ -60,8 +85,8 @@
                                         maximiser</span><span style="display:none"><i class="feather icon-minimize"></i>
                                         restaurer</span></a></li>
                             <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                            class="feather icon-minus"></i> s'effondrer</span><span style="display:none"><i
-                                            class="feather icon-plus"></i> agrandir</span></a>
+                                            class="feather icon-minus"></i> s'effondrer</span><span
+                                        style="display:none"><i class="feather icon-plus"></i> agrandir</span></a>
                             </li>
                             <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i>
                                     recharger</a></li>
@@ -93,7 +118,7 @@
                         <tbody id="rows-box"></tbody>
                     </table>
 
-                    
+
 
                     <div id="spinner-box" class="text-center">
                         <div class="spinner-border mb-3" role="status"></div>

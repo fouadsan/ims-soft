@@ -2,9 +2,10 @@ from django.http import JsonResponse
 
 from .models import Category, Product
 
+
 def objects_list_and_create(request, form):
     instance = form.save(commit=False)
-    instance.created_by=request.user
+    instance.created_by = request.user
     instance = form.save()
     print(instance)
     if hasattr(instance, 'article_num'):
@@ -17,13 +18,13 @@ def objects_list_and_create(request, form):
             'created_at': instance.created_at,
             'updated_at': instance.updated_at
         })
-    else :
+    else:
         return JsonResponse({
             'id': instance.id,
             'name': instance.name,
             'created_at': instance.created_at
         })
-    
+
 
 def load_objects(request, num_objs, model):
     model = eval(model)
@@ -37,7 +38,7 @@ def load_objects(request, num_objs, model):
         if model == Product:
             item = {
                 'id': obj.id,
-                'name': obj.name,                   
+                'name': obj.name,
                 'category': obj.category.name,
                 'article_num': obj.article_num,
                 'created_by': obj.created_by.username,
@@ -46,10 +47,10 @@ def load_objects(request, num_objs, model):
             }
         else:
             item = {
-                    'id': obj.id,
-                    'name': obj.name,
-                    'created_at': obj.created_at
-                }
+                'id': obj.id,
+                'name': obj.name,
+                'created_at': obj.created_at
+            }
         data.append(item)
     return JsonResponse({'data': data[lower:upper], 'size': size})
 
@@ -60,14 +61,14 @@ def object_data(request, model, pk):
     if model == Product:
         data = {
             'id': obj.id,
-            'name': obj.name,                   
+            'name': obj.name,
             'category': obj.category.name,
             'article_num': obj.article_num,
             'created_by': obj.created_by.username,
             'created_at': obj.created_at,
             'updated_at': obj.updated_at
         }
-    else :
+    else:
         data = {
             'id': obj.id,
             'name': obj.name,
@@ -75,10 +76,11 @@ def object_data(request, model, pk):
         }
     return JsonResponse({'data': data})
 
+
 def update_object(request, model, pk):
     model = eval(model)
     obj = model.objects.get(pk=pk)
- 
+
     if model == Product:
         new_name = request.POST.get('name')
         new_category = request.POST.get('category')
@@ -92,17 +94,26 @@ def update_object(request, model, pk):
             'category': obj.category.name,
             'article_num': new_article_num,
         })
-    else :
+    else:
         new_name = request.POST.get('name')
         obj.name = new_name
         obj.save()
         return JsonResponse({
             'name': new_name
         })
-    
+
 
 def delete_object(request, model, pk):
     model = eval(model)
     obj = model.objects.get(pk=pk)
     obj.delete()
-    return JsonResponse({'msg':'Object has been deleted'})
+    return JsonResponse({'msg': 'Object has been deleted'})
+
+
+def delete_selected_objects(request, model):
+    model = eval(model)
+    object_ids = request.POST.getlist(('id_list[]'))
+    for id in object_ids:
+        obj = model.objects.get(pk=id)
+        obj.delete()
+    return JsonResponse({'msg': 'Objects have been deleted'})

@@ -59,7 +59,8 @@
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p id="delMsg" class="mb-0">Etes-vous sûr que vous voulez supprimer: </p>
+                <p class="mb-0">Etes-vous sûr que vous voulez supprimer: </p>
+                <p id="delMsgName"></p>
             </div>
             <div class="modal-footer">
                 <form id="delete-form">
@@ -72,14 +73,50 @@
     </div>
 </div>
 
+<!-- Delete Selected start -->
+<div id="deleteSelectedModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel4"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel4">Supprimer les produits sélectionnée</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="delSelMsg" class="mb-0"></p>
+            </div>
+            <div class="modal-footer">
+                <form id="delete-selected-form">
+                    {% csrf_token %}
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn  btn-danger" id="submitDelSel">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <!-- [ sample-page ] start -->
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
                 <h5>Produits</h5>
-                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#addModal"> Ajouter +
-                </button>
+                <div class="d-flex flex-wrap justify-content-around mt-3">
+                    <div>
+                        <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#addModal">
+                            Ajouter un produit
+                        </button>
+                        <button type="button" class="btn btn-danger" id="delete-selected-btn" data-toggle="modal"
+                            data-target="#deleteSelectedModal">Supprimer la selection
+                        </button>
+                    </div>
+                    <div>
+                        <a href="" class="btn btn-info mr-3">Exporter .Csv</a>
+                    </div>
+                </div>
+                <a href="{% url 'products:export-csv' %}" class="btn btn-info mr-3">Exporter .Csv</a>
                 <div class="card-header-right">
                     <div class="btn-group card-option">
                         <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
@@ -91,8 +128,8 @@
                                         maximiser</span><span style="display:none"><i class="feather icon-minimize"></i>
                                         restaurer</span></a></li>
                             <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                            class="feather icon-minus"></i> s'effondrer</span><span style="display:none"><i
-                                            class="feather icon-plus"></i> agrandir</span></a>
+                                            class="feather icon-minus"></i> s'effondrer</span><span
+                                        style="display:none"><i class="feather icon-plus"></i> agrandir</span></a>
                             </li>
                             <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i>
                                     recharger</a></li>
@@ -123,7 +160,7 @@
                         <tbody id="rows-box"></tbody>
                     </table>
 
-                    
+
 
                     <div id="spinner-box" class="text-center">
                         <div class="spinner-border mb-3" role="status"></div>

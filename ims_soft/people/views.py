@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .utils import load_objects, objects_list_and_create, object_data, update_object, delete_object
+from .utils import load_objects, objects_list_and_create, object_data, update_object, delete_object, delete_selected_objects
 from .forms import SupplierForm, ClientForm, EmployeeForm
 from .models import Supplier
 
@@ -49,6 +49,12 @@ def delete_supplier(request, pk):
     return redirect('people:suppliers')
 
 
+def delete_selected_suppliers(request):
+    if request.is_ajax():
+        return delete_selected_objects(request, "Supplier")
+    return redirect('people:suppliers')
+
+
 @login_required
 def clients_list_and_create(request):
     form = ClientForm(request.POST or None)
@@ -92,12 +98,18 @@ def delete_client(request, pk):
     return redirect('people:clients')
 
 
+def delete_selected_clients(request):
+    if request.is_ajax():
+        return delete_selected_objects(request, "Client")
+    return redirect('people:clients')
+
+
 @login_required
 def employees_list_and_create(request):
     form = EmployeeForm(request.POST or None)
     if request.is_ajax():
         return objects_list_and_create(request, form)
-        
+
     context = {
         'section_title': 'People',
         'title': 'employees',
@@ -133,3 +145,9 @@ def delete_employee(request, pk):
     if request.is_ajax():
         return delete_object(request, "Employee", pk)
     return redirect('people:employees')
+
+
+def delete_selected_employees(request):
+    if request.is_ajax():
+        return delete_selected_objects(request, "Employee")
+    return redirect('products:employees')

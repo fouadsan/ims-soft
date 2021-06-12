@@ -2,6 +2,8 @@ const rowsBox = document.getElementById('rows-box')
 const spinnerBox = document.getElementById('spinner-box')
 const actionBtn = document.getElementById('action-btn')
 const loadBtn = document.getElementById('load-btn')
+const deleteSelectedBtn = document.getElementById('delete-selected-btn')
+
 const endBox = document.getElementById('end-box')
 
 const createForm = document.getElementById('create-form')
@@ -36,6 +38,7 @@ const getCookie = (name) => {
 const csrftoken = getCookie('csrftoken');
 
 let visible = 5
+
 const getData = () => {
     $.ajax({
         type: 'GET',
@@ -50,7 +53,8 @@ const getData = () => {
 
                     el.article_num ?
                         rowsBox.innerHTML += `
-                        <tr>
+                        <tr id="${el.id}">
+                            <th scope="row"><input type="checkbox" value="${el.id}"/></th>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="article_num-${el.id}">${el.article_num}</td>
@@ -71,7 +75,8 @@ const getData = () => {
                         </tr>
                     `:
                         rowsBox.innerHTML += `
-                        <tr>
+                        <tr id="${el.id}">
+                            <th scope="row"><input type="checkbox" onclick="check()" value="${el.id}"/></th>
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="prodcat-${el.id}">xxx</td>
@@ -132,17 +137,18 @@ createForm.addEventListener('submit', e => {
             if (response.hasOwnProperty('article_num')) {
                 response.category ? response.category : response.category = "N/A"
                 response.article_num ? response.article_num : response.article_num = "N/A"
-            } 
+            }
 
             response.article_num ?
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr>
-                <td id="id-${response.id}">${response.id}</td>
-                <td id="name-${response.id}">${response.name}</td>
-                <td id="article_num-${response.id}">${response.article_num}</td>
-                <td id="category-${response.id}">${response.category}</td>
-                <td id="instock-${response.id}">xxx</td>
-                <td id="barcode-${response.id}">xxx</td>
+                <tr id="${response.id}">
+                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${response.id}"/></th>
+                    <td id="id-${response.id}">${response.id}</td>
+                    <td id="name-${response.id}">${response.name}</td>
+                    <td id="article_num-${response.id}">${response.article_num}</td>
+                    <td id="category-${response.id}">${response.category}</td>
+                    <td id="instock-${response.id}">xxx</td>
+                    <td id="barcode-${response.id}">xxx</td>
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
@@ -150,28 +156,29 @@ createForm.addEventListener('submit', e => {
                         </button>&nbsp;
                         <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
                         title="Remove" data-toggle="modal" data-target="#deleteModal"
-                         data-item="${response.id}" data-item-name="${response.name}">
+                            data-item="${response.id}" data-item-name="${response.name}">
                             <i class="feather icon-trash"></i>
                         </button>
                     </td>
                 </tr>
             `) :
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr>
-                <td id="id-${response.id}">${response.id}</td>
-                <td id="name-${response.id}">${response.name}</td>
-                <td id="prodcat-${response.id}">xxx</td>
-                <td>
-                    <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
-                    title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
-                        <i class="feather icon-edit-2"></i>
-                    </button>&nbsp;
-                    <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
-                    title="Remove" data-toggle="modal" data-target="#deleteModal"
-                        data-item="${response.id}" data-item-name="${response.name}">
-                        <i class="feather icon-trash"></i>
-                    </button>
-                </td>
+                <tr id="${response.id}">
+                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${response.id}"/></th>
+                    <td id="id-${response.id}">${response.id}</td>
+                    <td id="name-${response.id}">${response.name}</td>
+                    <td id="prodcat-${response.id}">xxx</td>
+                    <td>
+                        <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
+                        title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
+                            <i class="feather icon-edit-2"></i>
+                        </button>&nbsp;
+                        <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
+                        title="Remove" data-toggle="modal" data-target="#deleteModal"
+                            data-item="${response.id}" data-item-name="${response.name}">
+                            <i class="feather icon-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             `)
             // $('#createModal').modal('hide')
@@ -199,7 +206,8 @@ searchInput.addEventListener('keyup', (e) => {
             obj.article_num ?
                 rowsBox.innerHTML +=
                 `
-                <tr>
+                <tr id="${obj.id}">
+                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${obj.id}"/></th>
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
                     <td id="article_num-${obj.id}">${obj.article_num}</td>
@@ -220,7 +228,8 @@ searchInput.addEventListener('keyup', (e) => {
                     </td>
                 </tr>
             `: rowsBox.innerHTML += `
-                <tr>
+                <tr id="${obj.id}">
+                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${el.id}"/></th>
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
                     

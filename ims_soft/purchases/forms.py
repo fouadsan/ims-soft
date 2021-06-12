@@ -2,21 +2,21 @@ from django import forms
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Submit
 
-from .models import ProductStock
+from .models import Purchase
 
 
-class StockForm(forms.ModelForm):
+class PurchaseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Field('reorder_level', id="id_updateReorderLevel"),
+            Field('status', id="id_updateStatus"),
         )
         self.helper.add_input(
             Submit('submit', 'Submit', css_class='btn-primary'))
         self.helper.form_method = 'POST'
-        super(StockForm, self).__init__(*args, **kwargs)
+        super(PurchaseForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = ProductStock
-        exclude = ('product', 'quantity', 'buy_price',
-                   'sale_price', 'discount', 'status')
+        model = Purchase
+        exclude = ('supplier', 'product', 'discount', 'tax', 'discount',
+                   'payment', 'left_to_pay', 'created_by', 'created_at')
