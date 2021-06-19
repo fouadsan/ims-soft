@@ -120,8 +120,9 @@ Dashboard
                             <h3>{{ products_stock.count }}</h3>
                             <h6 class="text-muted m-b-0">
                                 <a href="{% url 'stock:stock-list' %}">
-                                    Product{{ products_stock.count|pluralize }}<i class="fa fa-caret-down text-c-blue m-l-10"></i>
-                                </a> 
+                                    Product{{ products_stock.count|pluralize }}<i
+                                        class="fa fa-caret-down text-c-blue m-l-10"></i>
+                                </a>
                             </h6>
                         </div>
                         <div class="col-4 text-right">

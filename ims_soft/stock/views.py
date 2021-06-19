@@ -4,10 +4,11 @@ from django.http import JsonResponse, HttpResponse
 from django.views import View
 from xhtml2pdf import context
 
-from .models import Barcode, ProductStock
+from .models import Barcode
 from .forms import StockForm
 from .utils import get_status, render_to_pdf
 from .resources import ProductStockResource
+from purchases.models import ProductAttribute
 
 
 def stock_list(request):
@@ -26,8 +27,8 @@ def load_stock(request, num):
         visible = 5
         upper = num
         lower = upper - visible
-        size = ProductStock.objects.all().count()
-        qs = ProductStock.objects.all()
+        size = ProductAttribute.objects.all().count()
+        qs = ProductAttribute.objects.all()
         data = []
         for obj in qs:
             get_status(obj)
@@ -38,7 +39,6 @@ def load_stock(request, num):
                 'quantity': obj.quantity,
                 'buy_price': obj.buy_price,
                 'sale_price': obj.sale_price,
-                'discount': obj.discount,
                 'reorder_level': obj.reorder_level,
                 'status': obj.status,
                 'barcode_digit': barcode.barcode_digit
@@ -51,10 +51,12 @@ def load_stock(request, num):
 @login_required
 def update_stock(request, pk):
     if request.is_ajax():
-        obj = ProductStock.objects.get(pk=pk)
+        obj = ProductAttribute.objects.get(pk=pk)
+        print(obj)
         new_reorder_level = request.POST.get('reorder_level')
         obj.reorder_level = new_reorder_level
         get_status(obj)
+        obj.save()
         return JsonResponse({
             'status': obj.status
         })
@@ -65,7 +67,7 @@ def update_stock(request, pk):
 @login_required
 def stock_data(request, pk):
     if request.is_ajax():
-        obj = ProductStock.objects.get(pk=pk)
+        obj = ProductAttribute.objects.get(pk=pk)
         barcode = Barcode.objects.get(product=obj.id)
         data = {
             'id': obj.id,
@@ -78,18 +80,18 @@ def stock_data(request, pk):
     return redirect('stock:stock-list')
 
 
-# data = {
-# 	"company": "Dennnis Ivanov Company",
-# 	"address": "123 Street name",
-# 	"city": "Vancouver",
-# 	"state": "WA",
-# 	"zipcode": "98663",
+data = {
+	"company": "Dennnis Ivanov Company",
+	"address": "123 Street name",
+	"city": "Vancouver",
+	"state": "WA",
+	"zipcode": "98663",
 
 
-# 	"phone": "555-555-2345",
-# 	"email": "youremail@dennisivy.com",
-# 	"website": "dennisivy.com",
-# 	}
+	"phone": "555-555-2345",
+	"email": "youremail@dennisivy.com",
+	"website": "dennisivy.com",
+	}
 
 # Opens up page as PDF
 qs = Barcode.objects.all()

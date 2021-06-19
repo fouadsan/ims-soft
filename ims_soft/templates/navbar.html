@@ -6,20 +6,30 @@
         <div class="navbar-content scroll-div ">
             <div class="">
                 <div class="main-menu-header">
-                    <img class="img-radius" src="{% static 'assets/images/user/avatar-2.jpg' %}"
-                        alt="User-Profile-Image">
+                    <img class="img-radius" src="{{ user.profile.image.url }}" alt="User-Profile-Image">
                     <div class="user-details">
-                        <div id="more-details">Administrator <i class="fa fa-caret-down"></i></div>
+                        <div id="more-details">{{ user.username }} <i class="fa fa-caret-down"></i></div>
                     </div>
                 </div>
-                <div class="collapse" id="nav-user-link">
+                <!-- <div class="collapse" id="nav-user-link">
                     <ul class="list-unstyled">
                         <li class="list-group-item">
                             <a href="{% url 'users:profile' %}"><i class="feather icon-user m-r-5"></i>View Profile</a>
                         </li>
                         </li>
-                        <li class="list-group-item"><a href="auth-normal-sign-in.html"><i
+                        <li class="list-group-item"><a href="{% url 'users:logout' %}"><i
                                     class="feather icon-log-out m-r-5"></i>Logout</a></li>
+                    </ul>
+                </div> -->
+                <div class="collapse" id="nav-user-link">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{% url 'users:profile' %}" data-toggle="tooltip"
+                                title="View Profile"><i class="feather icon-user"></i></a></li>
+                        <li class="list-inline-item"><a href="email_inbox.html"><i class="feather icon-mail"
+                                    data-toggle="tooltip" title="Messages"></i><small
+                                    class="badge badge-pill badge-primary">5</small></a></li>
+                        <li class="list-inline-item"><a href="{% url 'users:logout' %}" data-toggle="tooltip"
+                                title="Logout" class="text-danger"><i class="feather icon-power"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -34,15 +44,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{% url 'stock:stock-list' %}" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-home"></i></span><span class="pcoded-mtext">Stock</span></a>
-                </li>
-                <li class="nav-item pcoded-hasmenu">
-                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-settings"></i></span><span class="pcoded-mtext">Settings</span></a>
-                    <ul class="pcoded-submenu">
-                        <li><a href="{% url 'dashboard:company' %}">Company Info</a></li>
-                        <li><a href="layout-horizontal.html">Authentication</a></li>
-                    </ul>
+                                class="feather icon-package"></i></span><span class="pcoded-mtext">Stock</span></a>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
@@ -86,23 +88,29 @@
                     </ul>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
-                    <label>Forms &amp; table</label>
+                    <label>Settings &amp; Authentication</label>
                 </li>
                 <li class="nav-item">
                     <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-file-text"></i></span><span class="pcoded-mtext">Forms</span></a>
+                                class="feather icon-settings"></i></span><span class="pcoded-mtext">General
+                            Settings</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'dashboard:company' %}" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-settings"></i></span><span class="pcoded-mtext">Company
+                            Informations</span></a>
                 </li>
                 <li class="nav-item">
                     <a href="tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i
-                                class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Bootstrap
-                            table</span></a>
+                                class="feather icon-lock"></i></span><span
+                            class="pcoded-mtext">Authentication</span></a>
                 </li>
             </ul>
 
             <div class="card text-center">
                 <div class="card-block">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="feather icon-sunset f-40"></i>
+                    <i class="feather icon-github f-40"></i>
                     <h6 class="mt-3">Developper</h6>
                     <p>Fouad Benayad</p>
                     <a href="https://1.envato.market/qG0m5" target="_blank"
@@ -220,10 +228,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius"
-                                alt="User-Profile-Image">
-                            <span>John Doe</span>
-                            <a href="auth-signin.html" class="dud-logout" title="Logout">
+                            <img src="{{ user.profile.image.url }}" class="img-radius" alt="User-Profile-Image">
+                            <span>{{ user.username }}</span>
+                            <a href="{% url 'users:logout' %}" class="dud-logout" title="Logout">
                                 <i class="feather icon-log-out"></i>
                             </a>
                         </div>
@@ -233,7 +240,8 @@
                                     Profile
                                 </a>
                             </li>
-                            <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock
+                            <li><a href="{% url 'users:logout' %}" class="dropdown-item"><i
+                                        class="feather icon-lock"></i> Lock
                                     Screen</a></li>
                         </ul>
                     </div>

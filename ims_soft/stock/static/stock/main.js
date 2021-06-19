@@ -37,6 +37,7 @@ const getData = () => {
         url: `data/${visible}/`,
         success: function (response) {
             const data = response.data
+            console.log(data)
             globalVariableSearchData = data
             setTimeout(() => {
                 spinnerBox.classList.add('not-visible')

@@ -58,6 +58,8 @@ const getData = () => {
                     el.fax ? el.fax : el.fax = "N/A"
                     el.address ? el.address : el.address = "N/A"
                     el.down_payments ? el.down_payments : el.down_payments = "N/A"
+                    el.credit1 ? el.credit1 : el.credit1 = "N/A"
+                    el.credit2 ? el.credit2 : el.credit2 = "N/A"
 
                     el.salary ?
                         rowsBox.innerHTML += `
@@ -91,7 +93,9 @@ const getData = () => {
                             <td id="email-${el.id}">${el.email}</td>
                             <td id="phone-${el.id}">${el.phone}</td>
                             <td id="fax-${el.id}">${el.fax}</td>
-                            <td id="address-${el.id}">${el.address}</td>                           
+                            <td id="address-${el.id}">${el.address}</td>
+                            <td id="address-${el.id}">${el.credit1}</td>
+                            <td id="address-${el.id}">${el.credit2}</td>                           
                             <td>
                                 <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                                 title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${el.id}">
@@ -155,6 +159,8 @@ createForm.addEventListener('submit', e => {
             if (response.hasOwnProperty('email')) {
                 response.email ? response.email : response.email = "N/A"
                 response.fax ? response.fax : response.fax = "N/A"
+                response.credit1 ? response.credit1 : response.credit1 = "N/A"
+                response.credit2 ? response.credit2 : response.credit2 = "N/A"
             } else if (response.hasOwnProperty('salary')) {
                 response.salary ? response.salary : response.salary = "N/A"
                 response.down_payments ? response.down_payments : response.down_payments = "N/A"
@@ -195,6 +201,8 @@ createForm.addEventListener('submit', e => {
                     <td id="phone-${response.id}">${response.phone}</td>
                     <td id="fax-${response.id}">${response.fax}</td>
                     <td id="address-${response.id}">${response.address}</td>
+                    <td id="address-${response.id}">${response.credit1}</td>
+                    <td id="address-${response.id}">${response.credit2}</td>
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${response.id}">
@@ -208,13 +216,13 @@ createForm.addEventListener('submit', e => {
                     </td>
                 </tr>
             `)
-            // $('#createModal').modal('hide')
-            handleModalAlerts('success', 'New Object added!')
+            $('#createModal').modal('hide')
+            handleAlerts('top', 'Creation', 'New object added!', 'success', false, 1500)
             endBox.textContent = ""
             createForm.reset()
         },
         error: function () {
-            handleModalAlerts('danger', 'ups...something went wrong')
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 })
@@ -232,6 +240,8 @@ searchInput.addEventListener('keyup', (e) => {
             obj.phone ? obj.phone : obj.phone = "N/A"
             obj.fax ? obj.fax : obj.fax = "N/A"
             obj.address ? obj.address : obj.address = "N/A"
+            obj.credit1 ? obj.credit1 : obj.credit1 = "N/A"
+            obj.credit2 ? obj.credit2 : obj.credit2 = "N/A"
             obj.down_payments ? obj.down_payments : obj.down_payments = "N/A"
             obj.salary ?
                 rowsBox.innerHTML +=
@@ -265,7 +275,9 @@ searchInput.addEventListener('keyup', (e) => {
                     <td id="email-${obj.id}">${obj.email}</td>
                     <td id="phone-${obj.id}">${obj.phone}</td>
                     <td id="fax-${obj.id}">${obj.fax}</td>
-                    <td id="address-${obj.id}">${obj.address}</td>                    
+                    <td id="address-${obj.id}">${obj.address}</td>  
+                    <td id="address-${obj.id}">${obj.credit1}</td>  
+                    <td id="address-${obj.id}">${obj.credit2}</td>                    
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">

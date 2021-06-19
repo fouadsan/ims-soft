@@ -16,11 +16,14 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- DateTimePicker css -->
     <link href="{% static 'assets/css/plugins/gijgo.min.css' %}" rel="stylesheet" type="text/css" />
 
+
     <!-- Custom js -->
+    <script src="{% static 'assets/js/menu-setting.js' %}" defer></script>
     <script src="{% static 'functions.js' %}" defer></script>
 
     {% block scripts %}
@@ -39,29 +42,34 @@
     <!-- [ Pre-loader ] End -->
 
     {% if user.is_authenticated %}
-        {% include "navbar.html" %}
-    {% endif %}
-
+    {% include "navbar.html" %}
     <div class="pcoded-main-container">
         <div class="pcoded-content">
+            {% include "breadcrumb.html" %}
 
-            {% if user.is_authenticated %}
-                {% include "breadcrumb.html" %}
-            {% endif %}
 
             {% block content %}
 
             {% endblock content %}
         </div>
     </div>
+    {% else %}
+    {% block content2 %}
+
+    {% endblock content2 %}
+    {%endif %}
 
     <!-- Required Js -->
     <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery-ui.min.js' %}"></script>
     <script src="{% static 'assets/js/ripple.js' %}"></script>
     <script src="{% static 'assets/js/gijgo.min.js' %}"></script>
     <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
-
+    <script src="{% static 'assets/js/plugins/sweetalert2.all.min.js' %}"></script>
+    <!-- Input mask Js -->
+    <script src="{% static 'assets/js/plugins/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.bootstrap.wizard.min.js' %}"></script>
 </body>
 
 </html>

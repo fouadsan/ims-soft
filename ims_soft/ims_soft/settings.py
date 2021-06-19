@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,7 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'people.template_context.get_context',
                 'products.template_context.get_context',
-                'stock.template_context.get_context',
+                'stock.template_context.get_context'
             ],
         },
     },
@@ -152,6 +153,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'dashboard:index'
+ACCOUNT_ACTIVATION_DAYS = 7
+SITE_ID = 1
+PASSWORD_RESET_TIMEOUT = 3600
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+DEFAULT_FROM_EMAIL = 'BenayadFouad Team <noreplay@fafopalermo.com>'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

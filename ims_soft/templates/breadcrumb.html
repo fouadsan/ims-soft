@@ -6,12 +6,13 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Sample Page</h5>
+                    <h5 class="m-b-10">{{ title }}</h5>
                 </div>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}"><i
+                                class="feather icon-home"></i></a></li>
                     {% if section_title %}
-                        <li class="breadcrumb-item"><a>{{ section_title }}</a></li>
+                    <li class="breadcrumb-item"><a>{{ section_title }}</a></li>
                     {% endif %}
                     <li class="breadcrumb-item"><a href="#!">{{ title }}</a></li>
                 </ul>

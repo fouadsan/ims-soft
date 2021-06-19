@@ -16,8 +16,12 @@ const emailInput = document.getElementById('id_updateEmail')
 const phoneInput = document.getElementById('id_updatePhone')
 const faxInput = document.getElementById('id_updateFax')
 const addressInput = document.getElementById('id_updateAddress')
+const credit1Input = document.getElementById('id_updateCredit1')
+const credit2Input = document.getElementById('id_updateCredit2')
+
 const salaryInput = document.getElementById('id_updateSalary')
 const downPayInput = document.getElementById('id_updateDownPay')
+
 
 var globalVariableUp;
 var globalVariableDel;
@@ -72,6 +76,9 @@ updateForm.addEventListener('submit', e => {
     const phone = document.getElementById('phone-' + localUpId)
     const fax = document.getElementById('fax-' + localUpId)
     const address = document.getElementById('address-' + localUpId)
+    const credit1 = document.getElementById('credit1-' + localUpId)
+    const credit2 = document.getElementById('credit2-' + localUpId)
+
     const salary = document.getElementById('salary-' + localUpId)
     const down_payments = document.getElementById('down_payments-' + localUpId)
 
@@ -91,16 +98,20 @@ updateForm.addEventListener('submit', e => {
             'email': emailInput.value,
             'phone': phoneInput.value,
             'fax': faxInput.value,
-            'address': addressInput.value
+            'address': addressInput.value,
+            'credit1': credit1Input.value,
+            'credit2': credit2Input.value
         },
         success: function (response) {
             $('#updateModal').modal('hide')
-            handleAlerts('success', 'Object has been updated')
+            handleAlerts('center', 'Update', 'Object has been updated', 'success', false, 1500)
 
             name.textContent = response.name
             if (response.hasOwnProperty('email')) {
                 response.email != "" ? email.textContent = response.email : email.textContent = "N/A"
                 response.fax != "" ? fax.textContent = response.fax : fax.textContent = "N/A"
+                response.credit1 != "" ? credit1.textContent = response.credit1 : credit1.textContent = "N/A"
+                response.credit2 != "" ? credit2.textContent = response.credit2 : credit2.textContent = "N/A"
             } else if (response.hasOwnProperty('salary')) {
                 response.salary != "" ? salary.textContent = response.salary : salary.textContent = "N/A"
                 response.down_payments != "" ? down_payments.textContent = response.down_payments : down_payments.textContent = "N/A"
@@ -109,8 +120,8 @@ updateForm.addEventListener('submit', e => {
             response.address != "" ? address.textContent = response.address : address.textContent = "N/A"
 
         },
-        error: function (error) {
-            console.log(error)
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 
@@ -143,11 +154,11 @@ deleteForm.addEventListener('submit', e => {
             $('tr#' + localDelId + '').fadeOut('slow');
             searchInput.value = ""
             $('#deleteModal').modal('hide')
-            handleAlerts('success', response.msg)
+            handleAlerts('top-end', 'Deletion', response.msg, 'success', false, 1500)
             localStorage.setItem('name', nameInput.value)
         },
-        error: function (error) {
-            console.log(error)
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 })
@@ -191,7 +202,10 @@ deleteSelectedForm.addEventListener('submit', e => {
                 // $('tr#' + id[i] + '').css('background-color:',)
                 $('tr#' + id_list[i] + '').fadeOut('slow');
             }
-            handleAlerts('success', response.msg)
+            handleAlerts('center', 'Deletion', response.msg, 'success', false, 1500)
+        },
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 })

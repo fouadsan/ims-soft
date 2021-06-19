@@ -10,12 +10,25 @@ const emailInput = document.getElementById('inputEmail')
 const phoneInput = document.getElementById('inputPhone')
 const addressInput = document.getElementById('inputAddress')
 const cityInput = document.getElementById('inputCity')
+const imageInput = $('#id_image')
+
+function upload_img(img) {
+    if (img.files && img.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img_id').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(img.files[0]);
+    }
+}
 
 
 profileForm.addEventListener('submit', e => {
     e.preventDefault()
 
-    const formData = new FormData()
+    var formData = new FormData()
     formData.append('csrfmiddlewaretoken', csrf[0].value)
     formData.append('first_name', fnameInput.value)
     formData.append('last_name', lnameInput.value)
@@ -23,16 +36,19 @@ profileForm.addEventListener('submit', e => {
     formData.append('phone', phoneInput.value)
     formData.append('address', addressInput.value)
     formData.append('city', cityInput.value)
+    formData.append("image", imageInput[0].files[0]);
 
     $.ajax({
         type: 'POST',
         url: '',
         enctype: 'multipart/form-data',
         data: formData,
-        success: function (response) {
+        dataType: 'json',
+        beforeSend: function () {
             saveProfilebox.classList.add('not-visible')
             spinnerBox.classList.remove('not-visible')
-            console.log(response)
+        },
+        success: function (response) {
             setTimeout(() => {
                 fnameInput.value = response.first_name
                 lnameInput.value = response.last_name
@@ -40,13 +56,15 @@ profileForm.addEventListener('submit', e => {
                 phoneInput.value = response.phone
                 addressInput.value = response.address
                 cityInput.value = response.city
+                // imageInput.value = response.image
                 spinnerBox.classList.add('not-visible')
                 saveProfilebox.classList.remove('not-visible')
-                handleAlerts('success', 'your profile has been updated!')
+                handleAlerts('center', 'Update', 'Your profile has been updated', 'success', false, 1500)
             }, 500);
         },
         error: function (error) {
-            handleAlerts('danger', 'Oops...Something went wrong!')
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
+
         },
         processData: false,
         contentType: false,

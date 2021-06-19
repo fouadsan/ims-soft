@@ -55,7 +55,7 @@ updateForm.addEventListener('submit', e => {
         },
         success: function (response) {
             $('#updateModal').modal('hide')
-            handleAlerts('success', 'Object has been updated')
+            handleAlerts('center', 'Update', 'Object has been updated', 'success', false, 1500)
             status.textContent = response.status
             if (status.textContent == "available") {
                 status.className = "badge badge-light-success";
@@ -65,8 +65,8 @@ updateForm.addEventListener('submit', e => {
                 status.className = "badge badge-light-danger";
             }
         },
-        error: function (error) {
-            console.log(error)
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import ProductStock, Barcode
+from .models import Barcode
 
-admin.site.register(ProductStock)
+
 admin.site.register(Barcode)
+

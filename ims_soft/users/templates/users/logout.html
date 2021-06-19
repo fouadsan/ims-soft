@@ -1,0 +1,14 @@
+{% extends 'users/users_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block users %}
+
+<!-- [ auth-signin ] start -->
+    <div class="">
+        <h1 class="">You have successfully logged out. </h1>
+        <p class=""><a href="{% url 'users:login' %}" class="click-login">Click Here</a> to login again.</p>
+    </div>                    
+<!-- [ auth-signin ] end -->
+{% endblock users %}

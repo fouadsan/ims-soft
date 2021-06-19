@@ -1,8 +1,8 @@
+from purchases.models import ProductAttribute
 from django import forms
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Submit
 
-from .models import ProductStock
 
 
 class StockForm(forms.ModelForm):
@@ -17,6 +17,6 @@ class StockForm(forms.ModelForm):
         super(StockForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = ProductStock
+        model = ProductAttribute
         exclude = ('product', 'quantity', 'buy_price',
                    'sale_price', 'discount', 'status')

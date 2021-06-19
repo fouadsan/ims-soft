@@ -21,7 +21,9 @@ def objects_list_and_create(request, form):
             'email': instance.email,
             'phone': instance.phone,
             'fax': instance.fax,
-            'address': instance.address
+            'address': instance.address,
+            'credit1': instance.credit1,
+            'credit2': instance.credit2
         })
 
 
@@ -50,7 +52,9 @@ def load_objects(request, num_objs, model):
                 'email': obj.email,
                 'phone': obj.phone,
                 'fax': obj.fax,
-                'address': obj.address
+                'address': obj.address,
+                'credit1': obj.credit1,
+                'credit2': obj.credit2
             }
         data.append(item)
     return JsonResponse({'data': data[lower:upper], 'size': size})
@@ -76,6 +80,8 @@ def object_data(request, model, pk):
             'phone': obj.phone,
             'fax': obj.fax,
             'address': obj.address,
+            'credit1': obj.credit1,
+            'credit2': obj.credit2
         }
     return JsonResponse({'data': data})
 
@@ -109,11 +115,15 @@ def update_object(request, model, pk):
         new_phone = request.POST.get('phone')
         new_fax = request.POST.get('fax')
         new_address = request.POST.get('address')
+        new_credit1 = request.POST.get('credit1')
+        new_credit2 = request.POST.get('credit2')
         obj.name = new_name
         obj.email = new_email
         obj.phone = new_phone
         obj.fax = new_fax
         obj.address = new_address
+        obj.credit1 = new_credit1
+        obj.credit2 = new_credit2
         obj.save()
         return JsonResponse({
             'name': new_name,

@@ -73,7 +73,7 @@ updateForm.addEventListener('submit', e => {
         },
         success: function (response) {
             $('#updateModal').modal('hide')
-            handleAlerts('success', 'Object has been updated')
+            handleAlerts('center', 'Update', 'Object has been updated', 'success', false, 1500)
 
             name.textContent = response.name
             if (response.hasOwnProperty('article_num')) {
@@ -81,8 +81,8 @@ updateForm.addEventListener('submit', e => {
                 response.category != "" ? category.textContent = response.category : category.textContent = "N/A"
             }
         },
-        error: function (error) {
-            console.log(error)
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 
@@ -116,12 +116,12 @@ deleteForm.addEventListener('submit', e => {
             $('tr#' + localDelId + '').fadeOut('slow');
             searchInput.value = ""
             $('#deleteModal').modal('hide')
-            handleAlerts('success', response.msg)
+            handleAlerts('top-end', 'Deletion', response.msg, 'success', false, 1500)
             localStorage.setItem('name', nameInput.value)
 
         },
-        error: function (error) {
-            console.log(error)
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 })
@@ -165,7 +165,10 @@ deleteSelectedForm.addEventListener('submit', e => {
                 // $('tr#' + id[i] + '').css('background-color:',)
                 $('tr#' + id_list[i] + '').fadeOut('slow');
             }
-            handleAlerts('success', response.msg)
+            handleAlerts('center', 'Deletion', response.msg, 'success', false, 1500)
+        },
+        error: function () {
+            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
         }
     })
 })

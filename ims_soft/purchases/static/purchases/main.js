@@ -1,5 +1,3 @@
-handleDateTimePicker('#datepicker')
-
 const rowsBox = document.getElementById('rows-box')
 const spinnerBox = document.getElementById('spinner-box')
 const actionBtn = document.getElementById('action-btn')
@@ -45,15 +43,11 @@ const getData = () => {
             setTimeout(() => {
                 spinnerBox.classList.add('not-visible')
                 data.forEach(el => {
-                    el.discount ? el.discount : el.discount = "N/A"
-                    el.tax ? el.tax : el.tax = "N/A"
-                    el.grand_total ? el.grand_total : el.grand_total = "N/A"
-                    el.payment ? el.payment : el.payment = "N/A"
-                    el.left_to_pay ? el.left_to_pay : el.left_to_pay = "N/A"
                     el.status ? el.status : el.status = "N/A"
                     rowsBox.innerHTML += `
                         <tr id="${el.id}">
                             <th scope="row"><input type="checkbox" clas="custom-control-input" value="${el.id}"/></th>
+                            <td id="id-${el.id}">${el.id}</td>
                             <td id="supplier-${el.id}">${el.supplier}</td>
                             <td id="created_by-${el.id}">${el.created_at}</td>
                             <td id="status-${el.id}">
@@ -114,13 +108,7 @@ searchInput.addEventListener('keyup', (e) => {
     if (filteredArr.length > 0) {
         endBox.textContent = ""
         filteredArr.map(obj => {
-            obj.discount ? obj.discount : obj.discount = "N/A"
-            obj.tax ? obj.tax : obj.tax = "N/A"
-            obj.grand_total ? obj.grand_total : obj.grand_total = "N/A"
-            obj.payment ? obj.payment : obj.payment = "N/A"
-            obj.left_to_pay ? obj.left_to_pay : obj.left_to_pay = "N/A"
             obj.status ? obj.status : obj.status = "N/A"
-
             rowsBox.innerHTML += `
                 <tr id="${obj.id}">
                     <th scope="row"><input type="checkbox" clas="custom-control-input" value="${obj.id}"/></th>

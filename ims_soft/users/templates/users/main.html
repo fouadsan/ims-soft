@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block scripts %}
 <script src="{% static 'users/main.js' %}" defer></script>
+
 {% endblock scripts %}
+
 
 {% block content %}
 <!-- [ Profile Content ] start -->
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>Admin</h5>
+                <h5>Profile Infomations</h5>
                 <div class="card-header-right">
                     <div class="btn-group card-option">
                         <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
@@ -45,52 +48,113 @@
                 </div>
             </div>
             <div class="card-body">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 <div id="alert-box"></div>
                 <form id="profile-form">
                     {% csrf_token %}
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputFname">First Name</label>
-                            <input type="text" class="form-control" id="inputFname" placeholder="First Name"
-                                value="{% if obj.first_name %} {{ obj.first_name }} {% endif %}">
+                    <div class="bt-wizard" id="progresswizard">
+                        <ul class="nav nav-pills nav-fill mb-3">
+                            <li class="nav-item"><a href="#progress-t-tab1" class="nav-link"
+                                    data-toggle="tab">Profile</a>
+                            </li>
+                            <li class="nav-item"><a href="#progress-t-tab2" class="nav-link"
+                                    data-toggle="tab">Address</a>
+                            </li>
+                            <li class="nav-item"><a href="#progress-t-tab3" class="nav-link"
+                                    data-toggle="tab">Picture</a>
+                            </li>
+                        </ul>
+                        <div id="bar" class="bt-wizard progress mb-3" style="height:6px">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0%;"></div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputLname">Last Name</label>
-                            <input type="text" class="form-control" id="inputLname" placeholder="Last Name"
-                                value="{% if obj.last_name %} {{ obj.last_name }} {% endif %}">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Ex: user@domaine.com"
-                                value="{% if obj.email %} {{ obj.email }} {% endif %}">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPhone">Phone Number</label>
-                            <input type="text" class="form-control" id="inputPhone" placeholder="Ex: 055190...."
-                                value="{% if obj.phone %} {{ obj.phone }} {% endif %}">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress"
-                                placeholder="Ex: Rue El Aid Bouchekrit Cité Saou Meziane"
-                                value="{% if obj.address %} {{ obj.address }} {% endif %}">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" placeholder="Ex: El-Eulma"
-                                value="{% if obj.city %} {{ obj.city }} {% endif %}">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3">
-                            <span id="saveProfile-box">Save</span>
-                            <div id="spinner-box" class="spinner-border text-center not-visible">
-                                <div class="sr-only" role="status"></div>
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="progress-t-tab1">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="progress-t-name" class="col-sm-3 col-form-label">First Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputFname"
+                                                placeholder="First Name"
+                                                value="{% if obj.first_name %} {{ obj.first_name }} {% endif %}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="progress-t-name" class="col-sm-3 col-form-label">Last Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="inputLname"
+                                                placeholder="Last Name"
+                                                value="{% if obj.last_name %} {{ obj.last_name }} {% endif %}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="progress-t-email" class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email"
+                                                value="{% if obj.email %} {{ obj.email }} {% endif %}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="progress-t-name" class="col-sm-3 col-form-label mob_no">Mobile
+                                            N°</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control mob_no" id="inputPhone"
+                                                data-mask="9999-999-999"
+                                                placeholder="{% if obj.phone %} {{ obj.phone }} {% endif %}">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </button>
+                            <div class="tab-pane" id="progress-t-tab2">
+                                <div class="form-group row">
+                                    <label for="progress-t-name" class="col-sm-3 col-form-label">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="inputAddress" placeholder="Address"
+                                            value="{% if obj.address %} {{ obj.address }} {% endif %}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="progress-t-name" class="col-sm-3 col-form-label">City</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="inputCity" placeholder="City"
+                                            value="{% if obj.city %} {{ obj.city }} {% endif %}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="progress-t-tab3">
+                                <div class="text-center">
+                                    <h5 class="mt-5">Update Picture</h5>
+                                </div>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <div class="form-group col-md-3 mt-3">
+                                        <img id="img_id" src="{{ user.profile.image.url }}" onchange="upload_img(this);"
+                                            alt="Avatar" class="tm-avatar img-fluid mb-4" />
+                                        <input type="file" name="image" accept="image/*" onchange="upload_img(this);"
+                                            id="id_image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-end btn-page">
+                                <button type="submit" class="btn btn-primary mt-5">
+                                    <span id="saveProfile-box">Save</span>
+                                    <div id="spinner-box" class="spinner-border text-center not-visible">
+                                        <div class="sr-only" role="status"></div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- [ Profile Content ] end -->
 {% endblock content %}
