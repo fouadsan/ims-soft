@@ -1,8 +1,6 @@
-from people.models import Supplier
 from django import forms
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.layout import Field, Submit
-from django.forms import models
 from django.forms import formset_factory
 
 from .models import Purchase
@@ -27,7 +25,7 @@ class PurchaseForm(forms.ModelForm):
                    'status', 'left_to_pay', 'created_by', 'created_at')
 
 
-class CreatePurchaseForm(forms.ModelForm):
+class CreatePurchaseForm(forms.ModelForm): 
     # created_at = forms.DateInput()
     supplier = forms.ModelChoiceField(queryset=Supplier.objects.all(), widget=forms.Select(attrs={'class':'custom-select'}))  
     sub_total = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control', 'readonly':'readonly'}), initial=0)
@@ -43,7 +41,7 @@ class CreatePurchaseForm(forms.ModelForm):
 
 
 class ProductPurchaseForm(forms.Form):
-    products = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control'}))
+    products = forms.ModelChoiceField(queryset=Product.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
     buy_price = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control'}))
     quantity = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control'}))
     total_amount = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'readonly':'readonly'}), initial=0)

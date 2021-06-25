@@ -16,7 +16,14 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- data tables css -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/dataTables.bootstrap4.min.css' %}">
+
+    <!-- select2 css -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/select2.min.css' %}">
 
     <!-- DateTimePicker css -->
     <link href="{% static 'assets/css/plugins/gijgo.min.css' %}" rel="stylesheet" type="text/css" />
@@ -25,6 +32,7 @@
     <!-- Custom js -->
     <script src="{% static 'assets/js/menu-setting.js' %}" defer></script>
     <script src="{% static 'functions.js' %}" defer></script>
+    <script src="{% static 'assets/js/pages/data-api-custom.js' %}" defer></script>
 
     {% block scripts %}
     {% endblock scripts %}
@@ -47,7 +55,6 @@
         <div class="pcoded-content">
             {% include "breadcrumb.html" %}
 
-
             {% block content %}
 
             {% endblock content %}
@@ -66,10 +73,17 @@
     <script src="{% static 'assets/js/ripple.js' %}"></script>
     <script src="{% static 'assets/js/gijgo.min.js' %}"></script>
     <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/sweetalert2.all.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/jquery.bootstrap.wizard.min.js' %}"></script>
+    <!-- select2 Js -->
+    <script src="{% static 'assets/js/plugins/select2.full.min.js' %}"></script>
     <!-- Input mask Js -->
     <script src="{% static 'assets/js/plugins/jquery.mask.min.js' %}"></script>
+    <!-- bootstrap-maxlength Js -->
+    <script src="{% static 'assets/js/plugins/bootstrap-maxlength.js' %}"></script>
+    
 </body>
 
 </html>

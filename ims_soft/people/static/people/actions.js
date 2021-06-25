@@ -37,8 +37,6 @@ $(document).on('click', '#update-btn', function () {
         type: 'GET',
         url: url + upId,
         success: salaryInput ? function (response) {
-            console.log(salaryInput)
-
             const data = response.data
             nameInput.value = data.name
             phoneInput.value = data.phone
@@ -47,14 +45,14 @@ $(document).on('click', '#update-btn', function () {
             downPayInput.value = data.down_payments
 
         } : function (response) {
-            console.log(response.data)
-
             const data = response.data
             nameInput.value = data.name
             emailInput.value = data.email
             phoneInput.value = data.phone
             faxInput.value = data.fax
             addressInput.value = data.address
+            credit1Input.value = data.credit1
+            credit2Input.value = data.credit2
 
         },
         error: function (error) {
@@ -70,7 +68,6 @@ updateForm.addEventListener('submit', e => {
     var localUpId = globalVariableUp
 
     const id = document.getElementById('id-' + localUpId)
-    console.log(id.textContent)
     const name = document.getElementById('name-' + localUpId)
     const email = document.getElementById('email-' + localUpId)
     const phone = document.getElementById('phone-' + localUpId)
@@ -105,7 +102,6 @@ updateForm.addEventListener('submit', e => {
         success: function (response) {
             $('#updateModal').modal('hide')
             handleAlerts('center', 'Update', 'Object has been updated', 'success', false, 1500)
-
             name.textContent = response.name
             if (response.hasOwnProperty('email')) {
                 response.email != "" ? email.textContent = response.email : email.textContent = "N/A"
@@ -142,7 +138,6 @@ deleteForm.addEventListener('submit', e => {
     var localDelId = globalVariableDel
 
     const id = document.getElementById('id-' + localDelId)
-    console.log(localDelId)
 
     $.ajax({
         type: 'POST',
@@ -152,7 +147,6 @@ deleteForm.addEventListener('submit', e => {
         },
         success: function (response) {
             $('tr#' + localDelId + '').fadeOut('slow');
-            searchInput.value = ""
             $('#deleteModal').modal('hide')
             handleAlerts('top-end', 'Deletion', response.msg, 'success', false, 1500)
             localStorage.setItem('name', nameInput.value)
@@ -168,8 +162,11 @@ $(document).on('click', '#delete-selected-btn', e => {
     var id_list = [];
     var delSelMsg = document.getElementById("delSelMsg");
     var submitDelSel = document.getElementById("submitDelSel")
-    $(':checkbox:checked').each(function (i) {
-        id_list[i] = $(this).val()
+    $('#rows-box tr').filter('.selected').each(function (i) {
+        id_list[i] = $(this).data('item')
+        if (typeof id_list[i] != 'number') {
+            id_list.splice(id_list[i])
+        }
     })
     if (id_list.length === 0) {
         delSelMsg.textContent = "Please select items to delete !"
@@ -185,8 +182,8 @@ $(document).on('click', '#delete-selected-btn', e => {
 deleteSelectedForm.addEventListener('submit', e => {
     e.preventDefault()
     var id_list = [];
-    $(':checkbox:checked').each(function (i) {
-        id_list[i] = $(this).val()
+    $('#rows-box tr').filter('.selected').each(function (i) {
+        id_list[i] = $(this).data('item')
     })
     $.ajax({
         url: deleteSelectedUrl,
@@ -196,12 +193,13 @@ deleteSelectedForm.addEventListener('submit', e => {
             id_list
         },
         success: function (response) {
-            $('input[type=checkbox]').prop('checked', false);
-            $('#deleteSelectedModal').modal('hide')
+            $('#rows-box tr').removeClass('selected');
+            $('#deleteSelectedModal').modal('hide');
             for (var i = 0; i < id_list.length; i++) {
                 // $('tr#' + id[i] + '').css('background-color:',)
                 $('tr#' + id_list[i] + '').fadeOut('slow');
             }
+            id_list = [];
             handleAlerts('center', 'Deletion', response.msg, 'success', false, 1500)
         },
         error: function () {

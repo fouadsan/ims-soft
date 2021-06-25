@@ -4,9 +4,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from crispy_forms.helper import FormHelper
 
-from .models import Profile
+from .models import Profile, Company
 
 
+class CompanyForm(forms.ModelForm): 
+    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Company Name (Required)', 'minlength':'3'}))
+    product_key = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control color-class', 'placeholder':'Product Activation Key (Required)', 'minlength':'3', 'maxlength':'25'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Company Email (Optional)'}), required=False)
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control mob_no', 'data-mask':'9999-999-999' ,'placeholder':'Company Phone (Optional)'}), required=False)
+    address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Company Address (Optional)'}), required=False)
+    web_url = forms.URLField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Website (Optional)'}), required=False)
+
+    
+
+    class Meta:
+        model = Company
+        fields = ('name', 'product_key', 'email', 'phone', 'address', 'web_url')
+
+    
 class UserRegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):

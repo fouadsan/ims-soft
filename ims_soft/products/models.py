@@ -10,7 +10,7 @@ class Category(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('-created_at', )
+        ordering = ('created_at', )
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
@@ -25,3 +25,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('created_at', )

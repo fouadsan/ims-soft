@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import profile_view, signup_view
+from .views import profile_view, signup_view, company_view
 from .forms import UserLoginForm, ResetPasswordForm, ResetPasswordConfirmForm
 from django.urls import path, reverse_lazy
 
@@ -12,7 +12,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(
         template_name='users/login.html',
         authentication_form=UserLoginForm,
-        extra_context={'header': 'Login'},),
+        extra_context={'header': 'Login'}),
         name='login'
     ),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html',
@@ -41,6 +41,6 @@ urlpatterns = [
              extra_context={'header': 'Change your password'},
          ),
          name='password_reset_confirm'
-         )
-
+         ),
+    path('company/', company_view, name='company')
 ]

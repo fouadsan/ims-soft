@@ -72,7 +72,8 @@ Categories List
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p id="delMsg" class="mb-0">Are you sure you want to delete: </p>
+                <p class="mb-2">Are you sure you want to delete: </p>
+                <p id="delMsgName"></p>
             </div>
             <div class="modal-footer">
                 <form id="delete-form">
@@ -96,8 +97,7 @@ Categories List
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <p class="mb-0"></p>
-                <p id="delMsgName"></p>
+                <p id="delSelMsg" class="mb-0"></p>
             </div>
             <div class="modal-footer">
                 <form id="delete-selected-form">
@@ -125,7 +125,7 @@ Categories List
                             data-target="#deleteSelectedModal">Delete Selection
                         </button>
                     </div>
-                </div>
+                </div> 
 
                 <div class="card-header-right">
                     <div class="btn-group card-option">
@@ -154,11 +154,10 @@ Categories List
                     </div>
                 </div>
                 <div id="alert-box"></div>
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div class="dt-responsive table-responsive">
+                    <table id="row-select" class="table table-striped table-bordered nowrap ">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>N°</th>
                                 <th>Category</th>
                                 <th>Products/Cat</th>
@@ -170,7 +169,7 @@ Categories List
                     <div id="spinner-box" class="text-center">
                         <div class="spinner-border mb-3" role="status"></div>
                     </div>
-                    <div class="text-center mb-3" id="end-box">
+                    <div class="text-center mb-3 mt-3" id="end-box">
                         <button class="btn btn-primary" id="load-btn">Load more</button>
                     </div>
                 </div>

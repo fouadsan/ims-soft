@@ -1,32 +1,40 @@
 from django.shortcuts import render
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+import subprocess
+from django.http import JsonResponse
+import re
+import json
 
-from .forms import CompanyForm
-from.models import Company
+from .models import Event
 
 @login_required
 def index(request):
     return render(request, 'dashboard/index.html', {'title': 'Dashboard'})
 
 @login_required
-def company(request):
-    obj = Company.objects.first()
-    form = CompanyForm(request.POST or None, instance=obj)
+def settings(request):
+   events = Event.objects.all()
+   context = {
+       'title': 'General Settings',
+       'events': events
+   }
+   return render(request, 'dashboard/settings.html', context)
+
+ 
+def db_data(request):
     if request.is_ajax():
-        if form.is_valid():
-            instance = form.save()
-            return JsonResponse({
-                'name': instance.name,
-                'email': instance.email,
-                'phone': instance.phone,
-                'address': instance.address,
-                'web_url': instance.web_url
+        backups = subprocess.run('manage.py listbackups', shell=True, stdout=subprocess.PIPE, text=True).stdout
+        backups = re.split('\s+', backups)
+        backups = backups[2::3][:-1]
+        # print(backups)
+        backups_json = json.dumps(backups)
+        backups_json = json.loads(backups_json)
+        return JsonResponse({
+                'data':backups_json
             })
-    context = {
-        'section_title': 'Settings',
-        'title': 'Company',
-        'obj': obj,
-        'form': form
-    }
-    return render(request, 'dashboard/company.html', context)
+
+
+def db_backup(request):
+    if request.is_ajax():
+        subprocess.run('manage.py dbbackup --clean', shell=True)
+        return JsonResponse({'msg': 'Database backup has been created'})

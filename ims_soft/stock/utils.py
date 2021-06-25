@@ -4,7 +4,7 @@ from io import BytesIO
 from xhtml2pdf import pisa
 from tablib import Dataset
 
-
+from .models import Barcode
 
 def get_status(obj):
     if int(obj.quantity) <= int(obj.reorder_level):
@@ -15,6 +15,22 @@ def get_status(obj):
         obj.status = 'available'
     obj.save()
 
+def get_barcode():
+    # Opens up page as PDF
+    try:
+        qs = Barcode.objects.all()
+        data = {}
+        for obj in qs:
+
+            item = {
+                'id': obj.id,
+                'barcode_digit': obj.barcode_digit,
+                'barcode_img': obj.barcode_img
+            }
+            data.update(item)
+        return data
+    except Exception:
+        pass
 
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)

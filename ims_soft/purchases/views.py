@@ -11,8 +11,8 @@ from .forms import PurchaseForm, CreatePurchaseForm, ProductFormSet
 from .resources import PurchaseResource
 from products.models import Product
 from purchases.models import ProductAttribute
-from stock.models import Barcode
 from .utils import render_to_pdf, get_status
+from stock.utils import get_barcode
 
 
 def new_purchase(request):
@@ -153,34 +153,22 @@ def delete_selected_purchases(request):
         return JsonResponse({'msg': 'Objects have been deleted'})
     return redirect('purchases:purchase-history')
 
-# data = {
-# 	"company": "Dennnis Ivanov Company",
-# 	"address": "123 Street name",
-# 	"city": "Vancouver",
-# 	"state": "WA",
-# 	"zipcode": "98663",
+data = {
+	"company": "Dennnis Ivanov Company",
+	"address": "123 Street name",
+	"city": "Vancouver",
+	"state": "WA",
+	"zipcode": "98663",
 
 
-# 	"phone": "555-555-2345",
-# 	"email": "youremail@dennisivy.com",
-# 	"website": "dennisivy.com",
-# 	}
-
-# Opens up page as PDF
-qs = Barcode.objects.all()
-data = {}
-for obj in qs:
-
-    item = {
-        'id': obj.id,
-        'barcode_digit': obj.barcode_digit,
-        'barcode_img': obj.barcode_img
-    }
-    data.update(item)
+	"phone": "555-555-2345",
+	"email": "youremail@dennisivy.com",
+	"website": "dennisivy.com",
+	}
 
 
 class ViewPDF(View):
-
+    data = data.update(get_barcode())
     def get(self, request, *args, **kwargs):
         pdf = render_to_pdf('purchases/pdf_template.html', data)
         return HttpResponse(pdf, content_type='application/pdf')

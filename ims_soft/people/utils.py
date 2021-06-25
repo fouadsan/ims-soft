@@ -130,7 +130,9 @@ def update_object(request, model, pk):
             'email': new_email,
             'phone': new_phone,
             'fax': new_fax,
-            'address': new_address
+            'address': new_address,
+            'credit1': new_credit1,
+            'credit2': new_credit2
         })
 
 

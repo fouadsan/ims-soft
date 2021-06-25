@@ -53,9 +53,8 @@ const getData = () => {
 
                     el.article_num ?
                         rowsBox.innerHTML += `
-                        <tr id="${el.id}">
-                            <th scope="row"><input type="checkbox" value="${el.id}"/></th>
-                            <td id="id-${el.id}">${el.id}</td>
+                        <tr id="${el.id}" data-item="${el.id}">
+                            <td id="id-${el.id}">${el.id}</td> 
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="article_num-${el.id}">${el.article_num}</td>
                             <td id="category-${el.id}">${el.category}</td>
@@ -75,8 +74,7 @@ const getData = () => {
                         </tr>
                     `:
                         rowsBox.innerHTML += `
-                        <tr id="${el.id}">
-                            <th scope="row"><input type="checkbox" onclick="check()" value="${el.id}"/></th>
+                        <tr id="${el.id}" data-item="${el.id}">
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="name-${el.id}">${el.name}</td>
                             <td id="prodcat-${el.id}">xxx</td>
@@ -141,8 +139,7 @@ createForm.addEventListener('submit', e => {
 
             response.article_num ?
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr id="${response.id}">
-                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${response.id}"/></th>
+                <tr id="${response.id}" data-item="${response.id}">
                     <td id="id-${response.id}">${response.id}</td>
                     <td id="name-${response.id}">${response.name}</td>
                     <td id="article_num-${response.id}">${response.article_num}</td>
@@ -163,8 +160,7 @@ createForm.addEventListener('submit', e => {
                 </tr>
             `) :
                 rowsBox.insertAdjacentHTML('afterbegin', `
-                <tr id="${response.id}">
-                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${response.id}"/></th>
+                <tr id="${response.id}" data-item="${response.id}">
                     <td id="id-${response.id}">${response.id}</td>
                     <td id="name-${response.id}">${response.name}</td>
                     <td id="prodcat-${response.id}">xxx</td>
@@ -191,7 +187,7 @@ createForm.addEventListener('submit', e => {
         }
     })
 })
-
+ 
 let filteredArr = []
 
 searchInput.addEventListener('keyup', (e) => {
@@ -201,13 +197,14 @@ searchInput.addEventListener('keyup', (e) => {
     if (filteredArr.length > 0) {
         endBox.textContent = ""
         filteredArr.map(obj => {
-            obj.category ? obj.category : obj.category = "N/A"
-            obj.article_num ? obj.article_num : obj.article_num = "N/A"
+            if (obj.hasOwnProperty('article_num')) {
+                obj.category ? obj.category : obj.category = "N/A"
+                obj.article_num ? obj.article_num : obj.article_num = "N/A"
+            }
             obj.article_num ?
                 rowsBox.innerHTML +=
                 `
-                <tr id="${obj.id}">
-                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${obj.id}"/></th>
+                <tr id="${obj.id}" data-item="${obj.id}">
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
                     <td id="article_num-${obj.id}">${obj.article_num}</td>
@@ -228,11 +225,10 @@ searchInput.addEventListener('keyup', (e) => {
                     </td>
                 </tr>
             `: rowsBox.innerHTML += `
-                <tr id="${obj.id}">
-                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${el.id}"/></th>
+                <tr id="${obj.id}" data-item="${obj.id}">
                     <td id="id-${obj.id}">${obj.id}</td>
                     <td id="name-${obj.id}">${obj.name}</td>
-                    
+                    <td id="prodcat-${obj.id}">xxx</td>
                     <td>
                         <button type="button" id="update-btn" class="btn btn-icon btn-outline-warning"
                         title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">

@@ -56,13 +56,15 @@ profileForm.addEventListener('submit', e => {
                 phoneInput.value = response.phone
                 addressInput.value = response.address
                 cityInput.value = response.city
-                // imageInput.value = response.image
+                // imageInput.value = response.image 
                 spinnerBox.classList.add('not-visible')
                 saveProfilebox.classList.remove('not-visible')
                 handleAlerts('center', 'Update', 'Your profile has been updated', 'success', false, 1500)
             }, 500);
         },
         error: function (error) {
+            spinnerBox.classList.add('not-visible')
+            saveProfilebox.classList.remove('not-visible')
             handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
 
         },

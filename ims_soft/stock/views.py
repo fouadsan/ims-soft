@@ -6,7 +6,7 @@ from xhtml2pdf import context
 
 from .models import Barcode
 from .forms import StockForm
-from .utils import get_status, render_to_pdf
+from .utils import get_status, get_barcode, render_to_pdf
 from .resources import ProductStockResource
 from purchases.models import ProductAttribute
 
@@ -93,21 +93,9 @@ data = {
 	"website": "dennisivy.com",
 	}
 
-# Opens up page as PDF
-qs = Barcode.objects.all()
-data = {}
-for obj in qs:
-
-    item = {
-        'id': obj.id,
-        'barcode_digit': obj.barcode_digit,
-        'barcode_img': obj.barcode_img
-    }
-    data.update(item)
-
 
 class ViewPDF(View):
-
+    data = get_barcode
     def get(self, request, *args, **kwargs):
         pdf = render_to_pdf('stock/pdf_template.html', data)
         return HttpResponse(pdf, content_type='application/pdf')

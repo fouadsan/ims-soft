@@ -26,48 +26,42 @@ const getCookie = (name) => {
 }
 const csrftoken = getCookie('csrftoken');
 
-var globalVariableSearchData
-const searchInput = document.getElementById('search-input')
-
-
 let visible = 5
 const getData = () => {
     $.ajax({
-        type: 'GET',
+        type: 'GET', 
         url: `data/${visible}/`,
         success: function (response) {
             const data = response.data
-            console.log(data)
-            globalVariableSearchData = data
-            setTimeout(() => {
+            setTimeout(() => { 
                 spinnerBox.classList.add('not-visible')
                 data.forEach(el => {
                     el.quantity ? el.quantity : el.quantity = "N/A"
                     el.buy_price ? el.buy_price : el.buy_price = "N/A"
                     el.sale_price ? el.sale_price : el.sale_price = "N/A"
                     rowsBox.innerHTML += `
-                        <tr>
-                            <td id="id-${el.id}">${el.id}</td>
-                            <td id="product-${el.id}">${el.product}</td>
-                            <td id="article_num-${el.id}">xxxx</td>
-                            <td id="quantity-${el.id}">${el.quantity}</td>
-                            <td id="status-${el.id}">
-                                <label id="status_label-${el.id}" class="badge ">${el.status}</label>
-                                <button type="button" id="update-btn" class="btn btn-icon btn-outline-secondary"
-                                title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${el.id}">
-                                <i class="feather icon-edit"></i>
-                                </button>
-                            </td>
-                            <td id="buy_price-${el.id}">${el.buy_price}</td>
-                            <td id="sale_price-${el.id}">${el.sale_price}</td> 
-                            <td id="barcode_digit-${el.id}">
-                                ${el.barcode_digit}
-                                <button type="button" id="printView-btn" class="btn btn-icon btn-outline-secondary"
-                                title="Print" data-toggle="modal" data-target="#printModal" data-item="${el.id}">
-                                <i class="feather icon-printer"></i>
-                                </button>
-                            </td>                           
-                        </tr>
+                    <tr>
+                        <td id="id-${el.id}">${el.id}</td>
+                        <td id="product-${el.id}">${el.product}</td>
+                        <td id="article_num-${el.id}">rogk</td>
+                        <td id="quantity-${el.id}">${el.quantity}</td>
+                        <td id="status-${el.id}">
+                            <label id="status_label-${el.id}" class="badge ">${el.status}</label>
+                            <button type="button" id="update-btn" class="btn btn-icon btn-outline-secondary"
+                            title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${el.id}">
+                            <i class="feather icon-edit-1"></i>
+                            </button>
+                        </td>
+                        <td id="buy_price-${el.id}">${el.buy_price}</td>
+                        <td id="sale_price-${el.id}">${el.sale_price}</td> 
+                        <td id="barcode_digit-${el.id}">
+                            ${el.barcode_digit}
+                            <button type="button" id="printView-btn" class="btn btn-icon btn-outline-secondary"
+                            title="Print" data-toggle="modal" data-target="#printModal" data-item="${el.id}">
+                            <i class="feather icon-printer"></i>
+                            </button>
+                        </td>                           
+                    </tr>
                     `
                     statusLabel = document.getElementById('status_label-' + el.id)
                     if (el.status == "available") {
@@ -97,57 +91,6 @@ loadBtn.addEventListener('click', () => {
     spinnerBox.classList.remove('not-visible')
     visible += 3
     getData()
-})
-
-let filteredArr = []
-
-searchInput.addEventListener('keyup', (e) => {
-    localSearchData = globalVariableSearchData
-    rowsBox.innerHTML = ""
-    filteredArr = localSearchData.filter(obj => obj['product'].includes(e.target.value))
-    if (filteredArr.length > 0) {
-        endBox.textContent = ""
-        filteredArr.map(obj => {
-            obj.quantity ? obj.quantity : obj.quantity = "N/A"
-            obj.buy_price ? obj.buy_price : obj.buy_price = "N/A"
-            obj.sale_price ? obj.sale_price : obj.sale_price = "N/A"
-
-            rowsBox.innerHTML += `
-                <tr>
-                    <td id="id-${obj.id}">${obj.id}</td>
-                    <td id="product-${obj.id}">${obj.product}</td>
-                    <td id="article_num-${obj.id}">xxx</td>
-                    <td id="product-${obj.id}">${obj.quantity}</td>
-                    <td id="status-${obj.id}">
-                        <label id="status_label-${obj.id}" class="badge ">${obj.status}</label>
-                        <button type="button" id="update-btn" class="btn btn-icon btn-outline-secondary"
-                        title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">
-                        <i class="feather icon-edit"></i>
-                        </button>
-                    </td>
-                    <td id="buy_price-${obj.id}">${obj.buy_price}</td>
-                    <td id="sale_price-${obj.id}">${obj.sale_price}</td>
-                    <td id="barcode_digit-${obj.id}">
-                        ${obj.barcode_digit}
-                        <button type="button" id="printView-btn" class="btn btn-icon btn-outline-secondary"
-                        title="Print" data-toggle="modal" data-target="#printModal" data-item="${obj.id}">
-                        <i class="feather icon-printer"></i>
-                        </button>
-                    </td> 
-                </tr>
-            `
-            statusLabel = document.getElementById('status_label-' + obj.id)
-            if (obj.status == "available") {
-                statusLabel.className += "badge-light-success";
-            } else if (obj.status == "medium") {
-                statusLabel.className += "badge-light-warning";
-            } else {
-                statusLabel.className += "badge-light-danger";
-            }
-        });
-    } else {
-        endBox.textContent = "No results found.."
-    }
 })
 
 getData()

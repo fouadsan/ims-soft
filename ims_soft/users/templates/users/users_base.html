@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block script %}
+
 {% endblock script %}
 
 
 {% block content2 %}
-
+{% if not my_company and staff_count <= 2 %}
+    {% include "users/company_modal.html" %}
+{% endif %}
 <div class="auth-wrapper">
     <div class="auth-content">
         <div class="card">

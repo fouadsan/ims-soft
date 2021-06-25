@@ -7,8 +7,7 @@ from io import BytesIO
 import string
 import secrets
 
-from products.models import Product
-from dashboard.models import Company
+from users.models import Company
 
 # class ProductStock(models.Model):
 #     STATUS_CHOICE = (

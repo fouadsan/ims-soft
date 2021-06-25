@@ -2,9 +2,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 {% block users %}
-
+{% if not my_company and staff_count <= 2 %}
+    <script src="{% static 'users/authorization.js' %}" defer></script>
+{% endif %}
 <!-- [ auth-signin ] start -->
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

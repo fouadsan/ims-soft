@@ -4,7 +4,9 @@
 
 
 {% block users %}
-
+{% if not my_company and staff_count <= 2 %}
+    <script src="{% static 'users/authorization.js' %}" defer></script>
+{% endif %}
 <!-- [ auth-signup ] start -->
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

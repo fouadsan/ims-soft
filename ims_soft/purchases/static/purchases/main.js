@@ -28,7 +28,6 @@ const getCookie = (name) => {
 }
 const csrftoken = getCookie('csrftoken');
 
-var globalVariableSearchData
 const searchInput = document.getElementById('search-input')
 
 
@@ -39,14 +38,12 @@ const getData = () => {
         url: `data/${visible}/`,
         success: function (response) {
             const data = response.data
-            globalVariableSearchData = data
             setTimeout(() => {
                 spinnerBox.classList.add('not-visible')
                 data.forEach(el => {
                     el.status ? el.status : el.status = "N/A"
                     rowsBox.innerHTML += `
-                        <tr id="${el.id}">
-                            <th scope="row"><input type="checkbox" clas="custom-control-input" value="${el.id}"/></th>
+                        <tr id="${el.id}" data-item="${el.id}">
                             <td id="id-${el.id}">${el.id}</td>
                             <td id="supplier-${el.id}">${el.supplier}</td>
                             <td id="created_by-${el.id}">${el.created_at}</td>
@@ -97,55 +94,6 @@ loadBtn.addEventListener('click', () => {
     spinnerBox.classList.remove('not-visible')
     visible += 3
     getData()
-})
-
-let filteredArr = []
-
-searchInput.addEventListener('keyup', (e) => {
-    localSearchData = globalVariableSearchData
-    rowsBox.innerHTML = ""
-    filteredArr = localSearchData.filter(obj => obj['supplier'].includes(e.target.value))
-    if (filteredArr.length > 0) {
-        endBox.textContent = ""
-        filteredArr.map(obj => {
-            obj.status ? obj.status : obj.status = "N/A"
-            rowsBox.innerHTML += `
-                <tr id="${obj.id}">
-                    <th scope="row"><input type="checkbox" clas="custom-control-input" value="${obj.id}"/></th>
-                    <td id="id-${obj.id}">${obj.id}</td>
-                    <td id="supplier-${obj.id}">${obj.supplier}</td>
-                    <td id="created_by-${obj.id}">${obj.created_at}</td>
-                    <td id="status-${obj.id}">
-                        <label id="status_label-${obj.id}" class="badge ">${obj.status}</label>
-                        <button type="button" id="update-btn" class="btn btn-icon btn-outline-secondary"
-                        title="Edit" data-toggle="modal" data-target="#updateModal" data-item="${obj.id}">
-                        <i class="feather icon-edit"></i>
-                        </button>
-                    </td>
-                    <td id="grand_total-${obj.id}">${obj.grand_total}</td>
-                    <td id="payment-${obj.id}">${obj.payment}</td> 
-                    <td id="created_by-${obj.id}">${obj.created_by}</td>
-                    <td>
-                        <button type="button" id="delete-btn" class="btn btn-icon btn-outline-danger"
-                        title="Remove" data-toggle="modal" data-target="#deleteModal"
-                            data-item="${obj.id}" data-item-name="Purchase N°${obj.id}">
-                            <i class="feather icon-trash"></i>
-                        </button>
-                    </td>                         
-                </tr>
-            `
-            statusLabel = document.getElementById('status_label-' + obj.id)
-            if (obj.status == "approved") {
-                statusLabel.className += "badge-success";
-            } else if (obj.status == "pending") {
-                statusLabel.className += "badge-warning";
-            } else {
-                statusLabel.className += "badge-danger";
-            }
-        });
-    } else {
-        endBox.textContent = "No results found.."
-    }
 })
 
 getData()

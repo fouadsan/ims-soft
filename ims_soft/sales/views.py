@@ -167,16 +167,16 @@ def delete_selected_sales(request):
 # 	}
 
 # Opens up page as PDF
-qs = Barcode.objects.all()
-data = {}
-for obj in qs:
+# qs = Barcode.objects.all()
+# data = {}
+# for obj in qs:
 
-    item = {
-        'id': obj.id,
-        'barcode_digit': obj.barcode_digit,
-        'barcode_img': obj.barcode_img
-    }
-    data.update(item)
+#     item = {
+#         'id': obj.id,
+#         'barcode_digit': obj.barcode_digit,
+#         'barcode_img': obj.barcode_img
+#     }
+#     data.update(item)
 
 
 class ViewPDF(View):

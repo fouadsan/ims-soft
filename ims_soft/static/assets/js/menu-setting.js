@@ -53,14 +53,14 @@ $(document).ready(function () {
         '<a href="#!"></a>' +
         '</div>' +
         '<div class="style-block">' +
-        '<h4 class="mb-2">Preferences <small class="font-weight-normal">v1.0 Preferences</small></h4>' +
+        '<h4 class="mb-2">Preferences</h4>' +
         '<hr class="">' +
         '<div class="m-style-scroller">' +
         '<h6 class="mt-2">Layouts</h6>' +
         '<div class="theme-color layout-type">' +
-        '<a href="#!" class="" data-value="menu-dark" title="Default Layout"><span></span><span></span></a>' +
-        '<a href="#!" class="" data-value="menu-light" title="Light"><span></span><span></span></a>' +
-        '<a href="#!" class="" data-value="dark" title="Dark"><span></span><span></span></a>' +
+        '<a href="#!" class="" data-value="menu-dark" title="Dark Menu"><span></span><span></span></a>' +
+        '<a href="#!" class="" data-value="menu-light" title="Light Theme"><span></span><span></span></a>' +
+        '<a href="#!" class="" data-value="dark" title="Dark Theme"><span></span><span></span></a>' +
         '<a href="#!" class="" data-value="reset" title="Reset">Reset</a>' +
         '</div>' +
         '<h6>background color</h6>' +
@@ -298,5 +298,6 @@ $(document).ready(function () {
             });
         }
     });
+
 });
 

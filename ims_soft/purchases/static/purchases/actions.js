@@ -87,46 +87,24 @@ $(document).on('click', '#delete-btn', function () {
 })
 
 
-deleteForm.addEventListener('submit', e => {
-    e.preventDefault()
-
-    var localDelId = globalVariableDel
-
-    const id = document.getElementById('id-' + localDelId)
-
-
-    $.ajax({
-        type: 'POST',
-        url: deleteUrl + id.textContent,
-        data: {
-            'csrfmiddlewaretoken': csrf[0].value,
-        },
-        success: function (response) {
-            $('tr#' + localDelId + '').fadeOut('slow');
-            searchInput.value = ""
-            $('#deleteModal').modal('hide')
-            handleAlerts('top-end', 'Deletion', response.msg, 'success', false, 1500)
-
-        },
-        error: function () {
-            handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
-        }
-    })
-})
-
 $(document).on('click', '#delete-selected-btn', e => {
     e.preventDefault()
     var id_list = [];
     var delSelMsg = document.getElementById("delSelMsg");
     var submitDelSel = document.getElementById("submitDelSel")
-    $(':checkbox:checked').each(function (i) {
-        id_list[i] = $(this).val()
+    $('#rows-box tr').filter('.selected').each(function (i) {
+        id_list[i] = $(this).data('item')
+        if (typeof id_list[i] != 'number') {
+            id_list.splice(id_list[i])
+        }
     })
     if (id_list.length === 0) {
+        console.log(id_list)
         delSelMsg.textContent = "Please select items to delete !"
         submitDelSel.classList.add('not-visible')
     }
     else {
+        console.log(id_list)
         delSelMsg.textContent = "Are you sure you want to delete this items ?"
         submitDelSel.classList.remove('not-visible')
     }
@@ -136,8 +114,8 @@ $(document).on('click', '#delete-selected-btn', e => {
 deleteSelectedForm.addEventListener('submit', e => {
     e.preventDefault()
     var id_list = [];
-    $(':checkbox:checked').each(function (i) {
-        id_list[i] = $(this).val()
+    $('#rows-box tr').filter('.selected').each(function (i) {
+        id_list[i] = $(this).data('item')
     })
     $.ajax({
         url: deleteSelectedUrl,
@@ -147,12 +125,13 @@ deleteSelectedForm.addEventListener('submit', e => {
             id_list
         },
         success: function (response) {
-            $('input[type=checkbox]').prop('checked', false);
-            $('#deleteSelectedModal').modal('hide')
+            $('#rows-box tr').removeClass('selected');
+            $('#deleteSelectedModal').modal('hide');
             for (var i = 0; i < id_list.length; i++) {
                 // $('tr#' + id[i] + '').css('background-color:',)
                 $('tr#' + id_list[i] + '').fadeOut('slow');
             }
+            id_list = [];
             handleAlerts('center', 'Deletion', response.msg, 'success', false, 1500)
         },
         error: function () {

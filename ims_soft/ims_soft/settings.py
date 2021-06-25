@@ -50,8 +50,18 @@ INSTALLED_APPS = [
 
     # Third party apps
     'crispy_forms',
-    'import_export'
+    'import_export',
+    'dbbackup'
 ]
+
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
+
+def backup_filename(databasename, servername, datetime, extension, content_type):
+    return f'backupOf-{servername}-{datetime}.dump'
+
+DBBACKUP_FILENAME_TEMPLATE = backup_filename
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +88,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'people.template_context.get_context',
                 'products.template_context.get_context',
-                'stock.template_context.get_context'
+                'stock.template_context.get_context',
+                'users.template_context.get_context'
             ],
         },
     },

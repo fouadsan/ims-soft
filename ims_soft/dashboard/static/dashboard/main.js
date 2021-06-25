@@ -1,53 +1,51 @@
-const alertBox = document.getElementById('alert-box')
+const dblistBox = document.getElementById('dblist-Box')
+const dbSelect = document.getElementById('db-select')
 const spinnerBox = document.getElementById('spinner-box')
-const saveProfilebox = document.getElementById('saveCompany-box')
-const profileForm = document.getElementById('company-form')
-const csrf = document.getElementsByName('csrfmiddlewaretoken')
+const eventBox = document.getElementById('event-box')
+const countdownBox = document.getElementById('countdown-box')
 
-const nameInput = document.getElementById('inputName')
-const emailInput = document.getElementById('inputEmail')
-const phoneInput = document.getElementById('inputPhone')
-const addressInput = document.getElementById('inputAddress')
-const webInput = document.getElementById('inputWebUrl')
+const eventDate = Date.parse(eventBox.textContent)
 
-
-profileForm.addEventListener('submit', e => {
-    e.preventDefault()
-
-    const formData = new FormData()
-    formData.append('csrfmiddlewaretoken', csrf[0].value)
-    formData.append('name', nameInput.value)
-    formData.append('email', emailInput.value)
-    formData.append('phone', phoneInput.value)
-    formData.append('address', addressInput.value)
-    formData.append('web_url', webInput.value)
-
+const getBackups = () => {
     $.ajax({
-        type: 'POST',
-        url: '',
-        enctype: 'multipart/form-data',
-        data: formData,
-        success: function (response) {
-            saveProfilebox.classList.add('not-visible')
-            spinnerBox.classList.remove('not-visible')
-            console.log(response)
+        type: 'GET', 
+        url: 'db-data/',
+        success: async function (response) { 
+            const data = await response.data
             setTimeout(() => {
-                nameInput.value = response.name
-                emailInput.value = response.email
-                phoneInput.value = response.phone
-                addressInput.value = response.address
-                webInput.value = response.web_url
                 spinnerBox.classList.add('not-visible')
-                saveProfilebox.classList.remove('not-visible')
-                handleAlerts('success', 'your company informations has been updated!')
-            }, 500);
+                dbSelect.classList.remove('not-visible')
+                for (var i = 0; i < data.length; i++) { 
+                    console.log(data[i]);
+                    dbSelect.innerHTML += `<option>${data[i]}</option>`
+                }
+            }, 1000);
+            
         },
         error: function (error) {
-            handleAlerts('danger', 'Oops...Something went wrong!')
-        },
-        processData: false,
-        contentType: false,
-        cache: false,
+            console.log(error)
+            // handleAlerts('center', 'Error!', 'Oops...something went wrong', 'error', true)
+        }
     })
-})
+}
 
+const myCountdown =  setInterval(() => {
+    const now = new Date().getTime()
+    const diff = eventDate - now
+    
+    const d = Math.floor(eventDate / (1000 * 60 * 60 * 24) - (now / (1000 * 60 * 60 * 24)))
+    const h = Math.floor((eventDate / (1000 * 60 * 60) - (now / (1000 * 60 * 60))) % 24)
+    const m = Math.floor((eventDate / (1000 * 60) - (now / (1000 * 60))) % 60)
+    const s = Math.floor((eventDate / (1000) - (now / (1000))) % 60)
+    
+    if (diff > 0) {
+        countdownBox.innerHTML = d + " days, " + h + " hours, " + m + " minutes, " + s + " seconds"
+    } else {
+        clearInterval(myCountdown)
+        countdownBox.innerHTML = "Game Over"
+    }
+}, 1000);
+
+
+
+getBackups()
