@@ -12,9 +12,9 @@ from.utils import get_company_form
 def signup_view(request):
     staff_count = User.objects.filter(is_staff=True).count()
     company_form = CompanyForm(request.POST or None)
-    if staff_count <= 2:
-        if request.is_ajax():
-            company_form = get_company_form(company_form)
+    # if staff_count <= 2:
+    #     if request.is_ajax():
+    #         company_form = get_company_form(company_form)
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():

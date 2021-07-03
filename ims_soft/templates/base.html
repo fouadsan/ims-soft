@@ -32,6 +32,13 @@
     <!-- Custom js -->
     <script src="{% static 'assets/js/menu-setting.js' %}" defer></script>
     <script src="{% static 'functions.js' %}" defer></script>
+    {% if event %}
+        {% if my_company %}
+            <script src="{% static 'renewal.js' %}" defer></script>
+        {% else %}
+            <script src="{% static 'authorization.js' %}" defer></script>
+        {% endif %}
+    {% endif %}
     <script src="{% static 'assets/js/pages/data-api-custom.js' %}" defer></script>
 
     {% block scripts %}
@@ -48,24 +55,37 @@
         </div>
     </div>
     <!-- [ Pre-loader ] End -->
+    {% if event %}
 
-    {% if user.is_authenticated %}
-    {% include "navbar.html" %}
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
-            {% include "breadcrumb.html" %}
+        {% if my_company %}
+            {% include "renewal.html" %}
+        {% else %}
+            {% include "authorization.html" %}
+        {% endif %}
+        
+        <div id="event-box" class="col-sm-6 text-center not-visible">{{ event.when|date:"M d, Y H:m:s" }}</div>
+        
+        {% if user.is_authenticated %}
+        {% include "navbar.html" %}
+        <div class="pcoded-main-container">
+            <div class="pcoded-content">
+                {% include "breadcrumb.html" %}
 
-            {% block content %}
+                {% block content %}
 
-            {% endblock content %}
+                {% endblock content %}
+            </div>
         </div>
-    </div>
+        {% else %}
+        {% block content2 %}
+
+        {% endblock content2 %}
+        {%endif %}
+
     {% else %}
-    {% block content2 %}
-
-    {% endblock content2 %}
-    {%endif %}
-
+        <h1>No Event Found</h1>
+    {% endif %}
+    
     <!-- Required Js -->
     <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>

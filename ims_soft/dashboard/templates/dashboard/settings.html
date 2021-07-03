@@ -50,12 +50,12 @@
                 <div id="alert-box"></div>
                 <div class="d-flex flex-wrap justify-content-around mt-5">
                     <div class="col-sm-6 text-center"><h6 style="line-height: 3;">Database Backup</h6></div>
-                    <form id="db-form" autocomplete="off">
+                    <form id="backup-form" autocomplete="off">
                         {% csrf_token %}
                         <div class="col-sm-6 text-center">
                             <button type="submit" class="btn btn-primary">
                                 <span id="downloadDb-box">Download</span>
-                                    <div id="spinner-box2" class="spinner-border text-center not-visible">
+                                    <div id="backup-spinner-box" class="spinner-border text-center not-visible">
                                         <div class="sr-only" role="status"></div>
                                     </div>
                             </button>
@@ -66,23 +66,36 @@
                 <div class="d-flex flex-wrap justify-content-around mt-5">
                     <div class="col-sm-6 text-center"><h6>Database Restore</h6></div>
                     <div id="dblist-Box" class="col-sm-6 text-center">
-                        <div id="spinner-box" class="spinner-border text-center">
+                        <div id="getbackups-spinner-box" class="spinner-border text-center">
                             <div class="sr-only" role="status"></div>
                         </div>
                         <select class="cusom-select not-visible" name="" id="db-select"></select>
+                        <form id="restore-form" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="col-sm-6 text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <span id="restore-box">Rollback</span>
+                                        <div id="rollback-spinner-box" class="spinner-border text-center not-visible">
+                                            <div class="sr-only" role="status"></div>
+                                        </div>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     
                 </div>
-                {% for event in events %}
-                    <div class="d-flex flex-wrap justify-content-around mt-5">
-                        <div class="col-sm-6 text-center"><h6>{{ event.name }}'s End</h6></div>
-                        <div id="event-box" class="col-sm-6 text-center">{{ event.when|date:"M d, Y H:m:s" }}</div>
-                    </div>
-                    <div class="text-center mt-5"><h5>Time Left:</h5></div>
-                    <div id="countdown-box" class="text-center mt-3 h3">
-                        <div class="spinner-border" role="status"></div>
-                    </div>
-                {% endfor %}
+                {% if events %}
+                    {% for event in events %}
+                        <div class="d-flex flex-wrap justify-content-around mt-5">
+                            <div class="col-sm-6 text-center"><h6>{{ event.name }}'s End</h6></div>
+                            <div id="event-box" class="col-sm-6 text-center">{{ event.when|date:"M d, Y H:m:s" }}</div>
+                        </div>
+                        <div class="text-center mt-5"><h5>Time Left:</h5></div>
+                        <div id="countdown-box" class="text-center mt-3 h3">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

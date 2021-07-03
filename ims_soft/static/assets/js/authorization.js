@@ -3,7 +3,6 @@ const alertBox = document.getElementById('alert-box')
 const spinnerBox = document.getElementById('spinner-box')
 const saveCompanybox = document.getElementById('saveCompany-box')
 const companyForm = document.getElementById('company-form')
-const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
 const nameInput = document.getElementById('id_name')
 const product_keyInput = document.getElementById('id_product_key')

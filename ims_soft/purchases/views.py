@@ -168,7 +168,7 @@ data = {
 
 
 class ViewPDF(View):
-    data = data.update(get_barcode())
+    # data = data.update(get_barcode())
     def get(self, request, *args, **kwargs):
         pdf = render_to_pdf('purchases/pdf_template.html', data)
         return HttpResponse(pdf, content_type='application/pdf')

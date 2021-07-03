@@ -4,6 +4,7 @@ import subprocess
 from django.http import JsonResponse
 import re
 import json
+import time
 
 from .models import Event
 
@@ -26,7 +27,6 @@ def db_data(request):
         backups = subprocess.run('manage.py listbackups', shell=True, stdout=subprocess.PIPE, text=True).stdout
         backups = re.split('\s+', backups)
         backups = backups[2::3][:-1]
-        # print(backups)
         backups_json = json.dumps(backups)
         backups_json = json.loads(backups_json)
         return JsonResponse({
@@ -38,3 +38,10 @@ def db_backup(request):
     if request.is_ajax():
         subprocess.run('manage.py dbbackup --clean', shell=True)
         return JsonResponse({'msg': 'Database backup has been created'})
+
+
+def db_restore(request):
+    if request.is_ajax():
+        db_name = request.POST.get('db_name')
+        subprocess.run(f'manage.py dbrestore -i {db_name}', shell=True, input=b'y')
+        return JsonResponse({'msg': 'Database has been restored'})

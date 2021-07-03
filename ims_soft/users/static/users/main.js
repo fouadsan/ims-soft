@@ -2,7 +2,6 @@ const alertBox = document.getElementById('alert-box')
 const spinnerBox = document.getElementById('spinner-box')
 const saveProfilebox = document.getElementById('saveProfile-box')
 const profileForm = document.getElementById('profile-form')
-const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
 const fnameInput = document.getElementById('inputFname')
 const lnameInput = document.getElementById('inputLname')
